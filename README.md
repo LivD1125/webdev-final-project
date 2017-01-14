@@ -1,7 +1,6 @@
-# web-dev-template
-
-1. git clone https://github.com/jannunzi/web-dev-template.git
-1. cd web-dev-template
+# DeFlumeri-Olivia-webdev
+1. git clone https://github.com/LivD1125/DeFlumeri-Olivia-webdev.git
+1. cd DeFlumeri-Olivia-webdev
 1. npm install
 1. mongod
 1. node server.js
