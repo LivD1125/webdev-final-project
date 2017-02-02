@@ -3,5 +3,74 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+.container-fluid {
+    height: 100%;
+}
+.profile {
+    padding: 15px;
+}
+.navbar {
+    background-color: #337ab7;
+}
+.navbar.pages {
+    background-color: gainsboro;
+    border: solid 1px darkgray;
+}
+.navbar-header {
+    width: 100%;
+}
+.navbar-brand.glyph {
+    color: ghostwhite;
+}
+.navbar-text.navbar-brand {
+    color: ghostwhite;
+    font-size: 25px;
+    font-weight: 700;
+}
+.navbar-brand.navbar-label.navbar-text {
+    color: #777;
+    font-size: 25px;
+    font-weight: 700;
+}
+.list-of-websites {
+    margin-top: 30px;
+    list-style-type: none;
+    padding-left: 20px;
+}
+.website-settings {
+    margin-right: 50px;
+}
+.nav-right-glyph {
+    padding-right: 15px;
+}
+.nav-left-glyph {
+    padding-left: 15px;
+}
+.nav-glyph.navbar-link {
+    color: ghostwhite;
+}
+.glyphicon {
+    top: -5% !important;
+}
+.website-name {
+    font-size: 25px;
+}
+.edit-site {
+    font-size: 25px;
+}
+.widget {
+    position: relative;
+
+}
+.widget .icon-row {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    background-color: white;
+}
+.input-group-btn .form-control {
+    background-color: white;
 }
