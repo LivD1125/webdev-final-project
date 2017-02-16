@@ -6,7 +6,6 @@
         .controller("WebsiteListController", WebSiteListController);
 
     function WebsiteEditController($routeParams, WebsiteService) {
-        console.log('edit controller');
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
         var websites = WebsiteService.findWebsitesByUser(userId);
@@ -26,10 +25,12 @@
 
         function updateWebsite(website) {
             WebsiteService.updateWebsite(vm.websiteId, website);
+            alert("Website Updated");
         }
 
         function deleteWebsite() {
             WebsiteService.deleteWebsite(vm.website);
+            alert("Delete Website Successful");
         }
     }
 
@@ -46,6 +47,7 @@
 
         function createWebsite(website) {
             WebsiteService.createWebsite(website);
+            alert("Website Created!");
         }
     }
     function WebSiteListController($routeParams, WebsiteService) {

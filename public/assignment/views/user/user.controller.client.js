@@ -35,17 +35,21 @@
         function updateUser(newUser) {
             var user = UserService.updateUser(userId, newUser);
             if(user != null) {
+                alert("User Updated (sorry these are bad messages - I ran out of time to reroute");
                 vm.message = "User Successfully Updated!"
             } else {
                 vm.error = "Unable to update user";
+                alert(vm.error);
             }
         }
         function deleteUser(userId) {
             var user = UserService.deleteUser(userId);
             if(user != null) {
                 vm.message = "User Successfully Deleted!";
+                alert(vm.message);
             } else {
                 vm.error = "Unable to update user";
+                alert(vm.error);
             }
         }
     }
@@ -64,7 +68,8 @@
                 vm.message = "User Successfully Updated!";
                 $location.url('/user/' + user._id);
             } else {
-                vm.error = "Unable to update user";
+                vm.error = "Unable to Create User";
+                alert(vm.error);
             }
         }
     }

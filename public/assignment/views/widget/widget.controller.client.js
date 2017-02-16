@@ -15,7 +15,6 @@
             vm.widgets = WidgetService.findWidgetByPageId(vm.pageId);
         }
         init();
-        console.log(vm.widgets);
     }
     function WidgetEditController($sce, $routeParams, WidgetService) {
         var vm = this;

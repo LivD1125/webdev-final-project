@@ -27,9 +27,11 @@
 
         function updatePage(page) {
             PageService.updatePage(vm.pageId, page);
+            alert("Page Updated!");
         }
         function deletePage() {
             PageService.deletePage(vm.pageId);
+            alert("Page Deleted!");
         }
 
     }
@@ -44,6 +46,7 @@
 
         function createPage(page) {
             PageService.createPage(page);
+            alert("New Page Created!");
         }
     }
     function PageListController($routeParams, PageService) {

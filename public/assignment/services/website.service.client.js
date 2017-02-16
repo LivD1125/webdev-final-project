@@ -50,7 +50,7 @@
                 }
             }
             if (del != null) {
-                websites.remove(del);
+                websites.splice(del, 1);
                 return angular.copy(del);
             }
             return null;

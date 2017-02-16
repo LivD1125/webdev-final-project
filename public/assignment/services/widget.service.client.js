@@ -77,7 +77,7 @@
                 }
             }
             if (del != null) {
-                widgets.remove(del);
+                widgets.splice(del, 1);
                 return angular.copy(del);
             }
             return null;

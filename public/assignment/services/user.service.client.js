@@ -72,7 +72,7 @@
                 }
             }
             if (del != null) {
-                users.remove(del);
+                users.splice(del, 1);
                 return del;
             }
             return null;
