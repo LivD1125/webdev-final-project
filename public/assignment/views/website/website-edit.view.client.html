@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Website List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
-                <a href="profile.html" class="navbar-link nav-glyph">
+                <a href="#/user/{{model.userId}}/website" class="navbar-link nav-glyph">
                   <span class="glyphicon glyphicon-menu-left">
                   </span>
                 </a>
             </p>
             <a class="navbar-brand navbar-text" href="#">
-                Websites
+                Edit Website
             </a>
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
-                <a href="website-new.html" class="navbar-link nav-glyph">
-          <span class="glyphicon glyphicon-plus">
+                <a ng-click="model.updateWebsite(model.website)"
+                   class="navbar-link nav-glyph">
+          <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
             </p>
@@ -29,22 +22,21 @@
     </div>
 </nav>
 <div class="container">
-<ul class="list-of-websites">
-    <li>
-        <a href="page-list.html" class="website-name">Address Book App</a>
-        <p class="pull-right website-settings">
-        <a href="website-edit.html" class="navbar-link">
-          <span class="glyphicon glyphicon-cog edit-site">
-          </span>
-        </a>
-    </p></li>
-</ul>
+    <div class="form-group">
+        <label for="name">Website Name</label>
+        <input ng-model="model.website.name" type="name" class="form-control" id="name" placeholder="Name">
+    </div>
+    <div class="form-group">
+        <label for="description">Website Description</label>
+        <textarea ng-model="model.website.description" class="form-control" id="description" placeholder="Description" rows="3"></textarea>
+    </div>
+    <a class="btn btn-danger btn-block" ng-click="model.deleteWebsite()">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
-                <a href="profile.html" class="navbar-link nav-glyph">
+                <a href="#/user/{{website.developerId}}" class="navbar-link nav-glyph">
           <span class="glyphicon glyphicon-user">
           </span>
                 </a>
@@ -52,5 +44,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>

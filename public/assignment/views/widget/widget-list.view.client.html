@@ -1,0 +1,134 @@
+
+
+<nav class="navbar navbar-default navbar-fixed-top pages">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
+                <a href="#/user/:uid/website/:wid/page" class="navbar-link">
+                  <span class="glyphicon glyphicon-menu-left">
+                  </span>
+                </a>
+            </p>
+            <a class="navbar-brand navbar-label navbar-text navbar-brand-centered" href="#">
+                Widgets
+            </a>
+            <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
+                <a href="#/user/:uid/website/:wid/page/:pid/widget/new" class="navbar-link">
+          <span class="glyphicon glyphicon-plus">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div ng-repeat="widget in model.widgets">
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADING">
+                <ng-include src="widget-heading.view.client.html">
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="widget-image.view.client.html">
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="widget-youtube.view.client.html">
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--<ul class="list-of-websites">-->
+        <!--<li>-->
+            <!--<div class="row">-->
+                <!--<div class="widget">-->
+                <!--<h1>Miniature Schnauzers!</h1>-->
+                <!--<p class="pull-right website-settings icon-row">-->
+                <!--<a href="#/user/:uid/website/:wid/page/:pid/widget/:wgid" class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-cog edit-site">-->
+                    <!--</span>-->
+                <!--</a>-->
+                    <!--<span class="glyphicon glyphicon-align-justify edit-site">-->
+                <!--</span>-->
+                <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="row">-->
+                <!--<div class="widget">-->
+                <!--<h4>They're pretty cool.</h4>-->
+                    <!--<p class="pull-right website-settings icon-row">-->
+                        <!--<a href="#/user/:uid/website/:wid/page/:pid/widget/:wgid" class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-cog edit-site">-->
+                    <!--</span>-->
+                        <!--</a>-->
+                        <!--<span class="glyphicon glyphicon-align-justify edit-site">-->
+                        <!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="row">-->
+                <!--<div class="widget">-->
+                    <!--<img class="img-responsive" src="../images/minischnauzer.jpg" alt="Chania">-->
+                    <!--<p class="pull-right pull-top website-settings icon-row">-->
+                            <!--<a href="#/user/:uid/website/:wid/page/:pid/widget/:wgid" class="navbar-link">-->
+                        <!--<span class="glyphicon glyphicon-cog edit-site">-->
+                        <!--</span>-->
+                            <!--</a>-->
+                            <!--<span class="glyphicon glyphicon-align-justify edit-site">-->
+                            <!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="row">-->
+                <!--<div class="widget">-->
+                <!--<p>This is an example of a a link with in a label.-->
+                    <!--<a href="http://www.amsc.us/templates/protostar/img/xbanner_slider-3.jpg.pagespeed.ic.0XFArR6xcW.jpg">Here</a>-->
+                    <!--is a picture of a miniature schnauzer which is the type of dog I have!</p>-->
+                    <!--<p class="pull-right website-settings icon-row">-->
+                        <!--<a href="#/user/:uid/website/:wid/page/:pid/widget/:wgid" class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-cog edit-site">-->
+                    <!--</span>-->
+                        <!--</a>-->
+                        <!--<span class="glyphicon glyphicon-align-justify edit-site">-->
+                        <!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="row">-->
+                <!--<div class="widget">-->
+                    <!--<div class="embed-responsive embed-responsive-16by9">-->
+                        <!--<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/knMwf-z3jw0"></iframe>-->
+                    <!--</div>-->
+                    <!--<div class="icon-row">-->
+                        <!--<p class="pull-right website-settings">-->
+                            <!--<a href="widget-youtube.view.client.html" class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-cog edit-site">-->
+                    <!--</span>-->
+                            <!--</a>-->
+                            <!--<span class="glyphicon glyphicon-align-justify edit-site">-->
+                        <!--</span>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom pages">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
+                <a href="../views/user/profile.html" class="navbar-link">
+          <span class="glyphicon glyphicon-user">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Widget</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
+
 <nav class="navbar navbar-default navbar-fixed-top pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
-                <a href="widget-list.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                   <span class="glyphicon glyphicon-menu-left">
                   </span>
                 </a>
@@ -20,7 +12,7 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
-                <a href="widget-list.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -45,26 +37,14 @@
         <label for="width">Width</label>
         <input type="text" class="form-control" id="width" placeholder="Width">
     </div>
-    <div class="form-group">
-        <label>Upload Image</label>
-        <div class="input-group">
-            <span class="input-group-btn">
-                <span class="btn btn-default btn-file">
-                    <input type="file" id="imgInp">
-                </span>
-            </span>
-            <input type="text" class="form-control" readonly>
-        </div>
-        <img id='img-upload'/>
-    </div>
     <a class="btn btn-danger btn-block"
-       href="widget-list.html">Delete</a>
+       href="widget-list.view.client.html">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
-                <a href="profile.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
           <span class="glyphicon glyphicon-user">
           </span>
                 </a>
@@ -72,5 +52,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>

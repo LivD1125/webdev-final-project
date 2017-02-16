@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Page</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
-                <a href="page-list.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                   <span class="glyphicon glyphicon-menu-left">
                   </span>
                 </a>
             </p>
             <a class="navbar-brand navbar-text navbar-label navbar-brand-centered" href="#">
-                New Page
+                Edit Page
             </a>
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
-                <a href="page-list.html" class="navbar-link">
+                <a ng-click="model.updatePage(model.page)" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -30,19 +21,21 @@
 </nav>
 <div class="container">
     <div class="form-group">
-        <label for="name">Name</label>
-        <input type="name" class="form-control" id="name" placeholder="Page Name">
+        <label for="name">Website Name</label>
+        <input ng-model="model.page.name" type="name" class="form-control" id="name" placeholder="Blog Post">
     </div>
     <div class="form-group">
         <label for="title-page">Title</label>
-        <input type="title-page" class="form-control" id="title-page" placeholder="Page Title">
+        <input ng-model="model.page.description" type="title-page" class="form-control" id="title-page" placeholder="Page Title">
     </div>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deletePage()">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
-                <a href="profile.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
           <span class="glyphicon glyphicon-user">
           </span>
                 </a>
@@ -50,5 +43,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>

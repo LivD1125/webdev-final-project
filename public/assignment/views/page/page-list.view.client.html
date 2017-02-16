@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Page List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
-                <a href="website-list.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website" class="navbar-link">
                   <span class="glyphicon glyphicon-menu-left">
                   </span>
                 </a>
@@ -21,7 +12,7 @@
                 Pages
             </a>
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
-                <a href="page-new.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new" class="navbar-link">
           <span class="glyphicon glyphicon-plus">
           </span>
                 </a>
@@ -30,22 +21,21 @@
     </div>
 </nav>
 <div class="container">
-    <ul class="list-of-websites">
-        <li>
-            <a href="widget-list.html" class="website-name">Blog Post</a>
-            <p class="pull-right website-settings">
-                <a href="page-edit.html" class="navbar-link">
+    <div class="list-of-websites" ng-repeat="page in model.pages">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget" class="website-name">{{page.name}}</a>
+        <p class="pull-right website-settings">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}" class="navbar-link">
           <span class="glyphicon glyphicon-cog edit-site">
           </span>
-                </a>
-            </p></li>
-    </ul>
+            </a>
+        </p>
+    </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
-                <a href="profile.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
           <span class="glyphicon glyphicon-user">
           </span>
                 </a>
@@ -53,5 +43,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>
