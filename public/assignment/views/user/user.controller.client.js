@@ -7,14 +7,19 @@
 
     function LoginController($location, UserService) {
         var vm = this;
+        //event handlers
         vm.login = login;
+
         function login(user) {
-            var loginUser = UserService.findUserByCredentials(user.username, user.password);
-            if(loginUser != null) {
-                $location.url('/user/' + loginUser._id);
-            } else {
-                vm.error = 'user not found';
-            }
+            var promise = UserService
+                .findUserByCredentials(user.username, user.password);
+            promise.success(function(user){
+                if(user) {
+                    $location.url("/user/"+user._id);
+                } else {
+                    vm.error = "User not found";
+                }
+            });
         }
     }
     function ProfileController($routeParams, UserService) {
@@ -24,33 +29,37 @@
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
 
-        var userId = $routeParams['uid'];
+        var userId = $routeParams.uid;
 
         function init() {
-            var user = UserService.findUserById(userId);
-            vm.user = user;
+            var promise = UserService.findUserById(userId);
+            promise.success(function(user){
+                vm.user = user;
+            });
         }
         init();
 
         function updateUser(newUser) {
-            var user = UserService.updateUser(userId, newUser);
-            if(user != null) {
-                alert("User Updated (sorry these are bad messages - I ran out of time to reroute");
-                vm.message = "User Successfully Updated!"
-            } else {
-                vm.error = "Unable to update user";
-                alert(vm.error);
-            }
+            UserService
+                .updateUser(userId, newUser)
+                .success(function(user) {
+                    if(user) {
+                        // do nothing
+                    } else {
+                        vm.error = "error updating user";
+                    }
+            });
         }
         function deleteUser(userId) {
-            var user = UserService.deleteUser(userId);
-            if(user != null) {
-                vm.message = "User Successfully Deleted!";
-                alert(vm.message);
-            } else {
-                vm.error = "Unable to update user";
-                alert(vm.error);
-            }
+            UserService
+                .deleteUser(userId)
+                .success(function(user) {
+                    if (user) {
+                        vm.mesage = "User Successfully Deleted";
+                    } else {
+                        vm.error = "Unable to Delete User";
+                    }
+            });
         }
     }
     function RegisterController($location, UserService) {
@@ -62,15 +71,15 @@
 
         function createUser(newUser) {
             console.log('createUser');
-            var user = UserService.createUser(newUser);
-            console.log(user);
-            if(user != null) {
-                vm.message = "User Successfully Updated!";
-                $location.url('/user/' + user._id);
-            } else {
-                vm.error = "Unable to Create User";
-                alert(vm.error);
-            }
+            UserService
+                .createUser(newUser)
+                .success(function(user) {
+                    vm.message = "Available";
+                    $location.url('/user/' + user._id);
+                })
+                .error(function(err) {
+                    vm.message = "Username already taken";
+            });;
         }
     }
 })();

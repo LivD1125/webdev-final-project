@@ -10,15 +10,22 @@
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
         var pageId = $routeParams.pid;
-        var websites = PageService.findPageByWebsiteId(websiteId);
 
         //event handler
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
 
         function init() {
-            var page = PageService.findPageById(pageId);
-            vm.page = page;
+            PageService
+                .findPageById(pageId)
+                .success(function(page) {
+                    vm.page = page;
+            });
+            PageService
+                .findPageByWebsiteId(websiteId)
+                .success(function(pages) {
+                    vm.pages = pages;
+            });
             vm.userId = userId;
             vm.websiteId = websiteId;
             vm.pageId = pageId;
@@ -26,36 +33,65 @@
         init();
 
         function updatePage(page) {
-            PageService.updatePage(vm.pageId, page);
-            alert("Page Updated!");
+            PageService
+                .updatePage(vm.pageId, page)
+                .success(function(page) {
+                vm.message = "Page Updated";
+                })
+                .error(function(err) {
+                vm.error = "error updating page";
+                });
         }
         function deletePage() {
-            PageService.deletePage(vm.pageId);
-            alert("Page Deleted!");
+            PageService
+                .deletePage(vm.pageId)
+                .success(function(page) {
+                vm.message = "Page Deleted!";
+            }).error(function(err) {
+                vm.error = "Error Deleting Page";
+            });
         }
 
     }
     function PageNewController($routeParams, PageService) {
         var websiteId = $routeParams.wid;
         var userId = $routeParams.uid;
-        var pages = PageService.findPageByWebsiteId(websiteId);
         var vm = this;
-        vm.websiteId = websiteId;
-        vm.userId = userId;
+        //event handlers
         vm.createPage = createPage;
+        function init() {
+            PageService.findPageByWebsiteId(websiteId).success(function(pages) {
+                vm.pages = pages;
+            });
+            vm.websiteId = websiteId;
+            vm.userId = userId;
+        }
+        init();
 
         function createPage(page) {
-            PageService.createPage(page);
-            alert("New Page Created!");
+            PageService
+                .createPage(page)
+                .success(function(page) {
+                vm.message = "New Page Created";
+                })
+                .error(function(err) {
+                    vm.error = "error creating page";
+                });
         }
     }
+
     function PageListController($routeParams, PageService) {
         var websiteId = $routeParams.wid;
         var userId = $routeParams.uid;
-        var pages = PageService.findPageByWebsiteId(websiteId);
         var vm = this;
-        vm.pages = pages;
-        vm.userId = userId;
-        vm.websiteId = websiteId;
+        function init() {
+            PageService.findPageByWebsiteId(websiteId).success(function(pages) {
+                vm.pages = pages;
+            });
+            vm.pages = pages;
+            vm.userId = userId;
+            vm.websiteId = websiteId;
+        }
+        init();
     }
 })();

@@ -75,3 +75,6 @@ body {
 .input-group-btn .form-control {
     background-color: white;
 }
+.widget-list {
+    display: flex;
+}

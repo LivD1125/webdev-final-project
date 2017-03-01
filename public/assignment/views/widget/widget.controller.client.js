@@ -12,7 +12,13 @@
         vm.pageId = $routeParams.pid;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetByPageId(vm.pageId);
+            console.log('init server');
+            console.log(WidgetService);
+            console.log(vm.pageId);
+            console.log(WidgetService.findWidgetByPageId(vm.pageId));
+            WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
+                vm.widgets = widgets;
+            });
         }
         init();
     }
@@ -23,8 +29,12 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
-        vm.widgets = WidgetService.findAllWidgets(vm.pageId);
-
+        function init() {
+            WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
+                vm.widgets = widgets;
+            });
+        }
+        init();
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";
             var urlParts = url.split('/');
@@ -40,7 +50,12 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
-        vm.widgets = WidgetService.findAllWidgets(vm.pageId);
+        function init() {
+            WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
+                vm.widgets = widgets;
+            });
+        }
+        vm.widgets =
 
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";

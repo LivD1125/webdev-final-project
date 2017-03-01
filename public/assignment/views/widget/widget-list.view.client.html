@@ -21,22 +21,30 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <div ng-repeat="widget in model.widgets">
-        {{widget.widgetType}}
+<div class="container-fluid">
+    <div ng-repeat="widget in model.widgets" class="widget-list">
         <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADING">
-                <ng-include src="widget-heading.view.client.html">
+            <div ng-switch-when="HEADER">
+                <ng-include src="'views/widget/widget-heading.view.client.html'"></ng-include>
             </div>
             <div ng-switch-when="IMAGE">
-                <ng-include src="widget-image.view.client.html">
+                <ng-include src="'views/widget/widget-image.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="HTML">
+                <ng-include src="'views/widget/widget-html.view.client.html'"></ng-include>
             </div>
             <div ng-switch-when="YOUTUBE">
-                <ng-include src="widget-youtube.view.client.html">
+                <ng-include src="'views/widget/widget-youtube.view.client.html'"></ng-include>
             </div>
         </div>
+        <div class="cs-toolbar pull-right">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
     </div>
-    </div>
+
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">

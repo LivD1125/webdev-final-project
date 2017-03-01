@@ -2,7 +2,10 @@
     angular
         .module("WebAppMaker")
         .config(Config);
-    function Config($routeProvider) {
+    function Config($routeProvider, $locationProvider, $httpProvider) {
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+
         $routeProvider
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
