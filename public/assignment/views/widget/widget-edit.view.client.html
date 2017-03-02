@@ -1,33 +1,50 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top pages">
     <div class="container-fluid">
-        <div class="navbar-text pull-left">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </div>
-        <div class="navbar-text pull-right">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
-                <span class="glyphicon glyphicon-ok"></span>
-            </a>
-        </div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Widget Editor</a>
+            <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+                  <span class="glyphicon glyphicon-menu-left">
+                  </span>
+                </a>
+            </p>
+            <a class="navbar-brand navbar-label navbar-text navbar-brand-centered" href="#">
+                Edit Widget
+            </a>
+            <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
+          <span class="glyphicon glyphicon-plus">
+          </span>
+                </a>
+            </p>
         </div>
     </div>
 </nav>
 
 
-<div class="container-fluid"
-     ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
+<div class="container-fluid">
+    <div ng-switch="model.widget.widgetType">
+        <div ng-switch-when="HEADER">
+            <div ng-include="'views/widget/widget-heading.view.client.html'"></div>
+        </div>
+        <div ng-switch-when="YOUTUBE">
+            <div ng-include="'views/widget/widget-youtube.view.client.html'"></div>
+        </div>
+        <div ng-switch-when="IMAGE">
+            <div ng-include="'views/widget/widget-image.view.client.html'"></div>
+        </div>
+    </div>
 
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom page-list">
+<nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">
-        <div class="navbar-text pull-right page-text">
-            <a href="#/user/{{model.userId}}">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
+        <div class="navbar-header">
+            <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+          <span class="glyphicon glyphicon-user">
+          </span>
+                </a>
+            </p>
         </div>
     </div>
 </nav>

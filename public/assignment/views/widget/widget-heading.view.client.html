@@ -1,58 +1,16 @@
-
-<!--<nav class="navbar navbar-default navbar-fixed-top pages">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="navbar-header">-->
-            <!--<p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">-->
-                <!--<a href="widget-list.view.client.html" class="navbar-link">-->
-                  <!--<span class="glyphicon glyphicon-menu-left">-->
-                  <!--</span>-->
-                <!--</a>-->
-            <!--</p>-->
-            <!--<a class="navbar-brand navbar-text navbar-label navbar-brand-centered" href="#">-->
-                <!--Widget Edit-->
-            <!--</a>-->
-            <!--<p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">-->
-                <!--<a href="widget-list.view.client.html" class="navbar-link">-->
-          <!--<span class="glyphicon glyphicon-ok">-->
-          <!--</span>-->
-                <!--</a>-->
-            <!--</p>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</nav>-->
-<!--<div class="container">-->
-    <!--<div class="form-group">-->
-        <!--<label for="name">Name</label>-->
-        <!--<input type="name" class="form-control" id="name" placeholder="Blog Post">-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="text">Text</label>-->
-        <!--<input type="text" class="form-control" id="text" placeholder="Text">-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="size">Size</label>-->
-        <!--<input type="text" class="form-control" id="size" placeholder="Size">-->
-    <!--</div>-->
-    <!--<a class="btn btn-danger btn-block"-->
-       <!--href="widget-list.view.client.html">Delete</a>-->
-<!--</div>-->
-<!--<nav class="navbar navbar-default navbar-fixed-bottom pages">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="navbar-header">-->
-            <!--<p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">-->
-                <!--<a href="#/user/{{model.userId}}" class="navbar-link">-->
-          <!--<span class="glyphicon glyphicon-user">-->
-          <!--</span>-->
-                <!--</a>-->
-            <!--</p>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</nav>-->
-<div ng-switch="widget.size">
-    <h1 ng-switch-when="1">{{widget.text}} {{widget.size}}</h1>
-    <h2 ng-switch-when="2">{{widget.text}} {{widget.size}}</h2>
-    <h3 ng-switch-when="3">{{widget.text}} {{widget.size}}</h3>
-    <h4 ng-switch-when="4">{{widget.text}} {{widget.size}}</h4>
-    <h5 ng-switch-when="5">{{widget.text}} {{widget.size}}</h5>
-    <h6 ng-switch-when="6">{{widget.text}} {{widget.size}}</h6>
+<div class="container">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" class="form-control" id="name" placeholder="Blog Post">
+    </div>
+    <div class="form-group">
+        <label for="text">Text</label>
+        <input type="text" class="form-control" id="text" placeholder="Text">
+    </div>
+    <div class="form-group">
+        <label for="size">Size</label>
+        <input type="text" class="form-control" id="size" placeholder="Size">
+    </div>
+    <a class="btn btn-danger btn-block"
+       href="widget-list.view.client.html">Delete</a>
 </div>

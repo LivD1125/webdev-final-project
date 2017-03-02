@@ -27,7 +27,7 @@
                     console.log([startIndex, endIndex]);
                     WidgetService.sortWidgetList(vm.pageId, startIndex, endIndex).success(function(widgets) {
                         vm.widgets = widgets;
-                    })
+                    });
                 }
             });
         function doYouTrustUrl(url) {
@@ -44,25 +44,33 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
         vm.widgetId = $routeParams.wgid;
-        vm.getEditorTemplateUrl = getEditorTemplateUrl;
+
 
         function init() {
-            vm.widget = WidgetService.findWidgetsById(vm.widgetId);
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            WidgetService.findWidgetById(vm.widgetId).success(function(widget) {
+                vm.widget = widget;
+            });
+            WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
+                vm.widgets = widgets;
+            });
+            vm.getEditUrl = getEditUrl;
         }
         init();
 
         function updateWidget() {
-            WidgetService.updateWidget(vm.widgetId);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            WidgetService.updateWidget(vm.widgetId).success(function(widget) {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            });
+
 
         }
-        function getEditorTemplateUrl(type) {
-            return 'widget-'+type+'-editor.view.client.html';
+        function getEditUrl(widgetType) {
+            return 'widget-'+widgetType+'-editor.view.client.html';
         }
         function deleteWidget() {
-            WidgetService.deleteWidget(vm.widgetId);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            WidgetService.deleteWidget(vm.widgetId).success(function(widget) {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            });
         }
 
     }

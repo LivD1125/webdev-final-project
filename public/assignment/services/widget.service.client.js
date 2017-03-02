@@ -16,7 +16,6 @@
 
         function createWidget(pageId, widget) {
           return $http.post("/api/page/"+pageId+"/widget", widget);
-
         }
         function findWidgetByPageId(pageId) {
           return $http.get("/api/page/"+pageId+"/widget");
@@ -27,7 +26,6 @@
         function updateWidget(widgetId, widget) {
             return $http.put("/api/widget/"+widgetId, widget);
         }
-
         function deleteWidget(widgetId) {
             return $http.del("/api/widget/"+widgetId);
         }
