@@ -4,6 +4,7 @@ module.exports = function (app) {
     app.get('/api/widget/:widgetId', findWidgetById);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
+    app.put("/api/page/:pageId/widget?initial=initial&final=final", sortWidgets);
 
     var widgets = [
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -16,6 +17,23 @@ module.exports = function (app) {
             "url": "https://youtu.be/AM2Ivdi9c4E" },
         { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     ];
+
+    function sortWidgets(req, res) {
+        var pageId = req.params.pageId;
+        var initial = req.query.initial;
+        var final = req.query.final;
+
+        var widg = [];
+        for (var w in widgets) {
+            if(pageId === widgets[w].pageId) {
+                widg.push(widgets[w]);
+            }
+        }
+        widgets.splice(final, 0, widgets[initial]);
+        widgets.splice(initial, 1);
+
+        res.json(widgets);
+    }
 
     function createWidget(req, res) {
         var newWidget = req.body;

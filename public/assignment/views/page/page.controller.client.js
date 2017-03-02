@@ -88,7 +88,6 @@
             PageService.findPageByWebsiteId(websiteId).success(function(pages) {
                 vm.pages = pages;
             });
-            vm.pages = pages;
             vm.userId = userId;
             vm.websiteId = websiteId;
         }

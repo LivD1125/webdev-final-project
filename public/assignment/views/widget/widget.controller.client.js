@@ -10,31 +10,26 @@
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
-
-        function init() {
-            console.log('init server');
-            console.log(WidgetService);
-            console.log(vm.pageId);
-            console.log(WidgetService.findWidgetByPageId(vm.pageId));
-            WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
-                vm.widgets = widgets;
-            });
-        }
-        init();
-    }
-    function WidgetEditController($sce, $routeParams, WidgetService) {
-        var vm = this;
         vm.doYouTrustUrl = doYouTrustUrl;
-        vm.userId = $routeParams.uid;
-        vm.websiteId = $routeParams.wid;
-        vm.pageId = $routeParams.pid;
-
-        function init() {
-            WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
-                vm.widgets = widgets;
+        WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
+            vm.widgets = widgets;
+        });
+        var startIndex = -1;
+        var endIndex = -1;
+        $('#widget-list')
+            .sortable({
+                axis: "y",
+                start: function (event, ui) {
+                    startIndex = ui.item.index();
+                },
+                stop: function (event, ui) {
+                    endIndex = ui.item.index();
+                    console.log([startIndex, endIndex]);
+                    WidgetService.sortWidgetList(vm.pageId, startIndex, endIndex).success(function(widgets) {
+                        vm.widgets = widgets;
+                    })
+                }
             });
-        }
-        init();
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";
             var urlParts = url.split('/');
@@ -43,6 +38,35 @@
             return $sce.trustAsResourceUrl(baseUrl);
         }
     }
+    function WidgetEditController($routeParams, WidgetService) {
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+        vm.widgetId = $routeParams.wgid;
+        vm.getEditorTemplateUrl = getEditorTemplateUrl;
+
+        function init() {
+            vm.widget = WidgetService.findWidgetsById(vm.widgetId);
+            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+        }
+        init();
+
+        function updateWidget() {
+            WidgetService.updateWidget(vm.widgetId);
+            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+
+        }
+        function getEditorTemplateUrl(type) {
+            return 'widget-'+type+'-editor.view.client.html';
+        }
+        function deleteWidget() {
+            WidgetService.deleteWidget(vm.widgetId);
+            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+        }
+
+    }
+
     function WidgetNewController($sce, $routeParams, WidgetService) {
         var vm = this;
         vm.doYouTrustUrl = doYouTrustUrl;

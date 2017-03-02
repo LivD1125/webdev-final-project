@@ -1,9 +1,8 @@
-
 <nav class="navbar navbar-default navbar-fixed-top pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
-                <a href="#/user/:uid/website/:wid/page/:pid/widget" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
                   <span class="glyphicon glyphicon-menu-left">
                   </span>
                 </a>
@@ -14,45 +13,23 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <ul class="list-of-websites">
-        <li>
-            <a href="widget-heading.view.client.html" class="website-name">Header</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">Label</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">HTML</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">Text Input</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">Link</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">Button</a>
-        </li>
-        <li>
-            <a href="widget-image.view.client.html" class="website-name">Image</a>
-        </li>
-        <li>
-            <a href="widget-youtube.view.client.html" class="website-name">Youtube</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">Data Table</a>
-        </li>
-        <li>
-            <a href="widget-list.view.client.html" class="website-name">Repeater</a>
-        </li>
-    </ul>
+
+<div class="row container-fluid" >
+
+    <a class = "btn btn-block" role="button" ng-click="model.createWid('HEADING')">Header</a>
+
+    <a class = "btn btn-block" role="button" ng-click = "model.createWid('IMAGE')">
+        Image</a>
+
+    <a class = "btn btn-block" role="button" ng-click="model.createWid('YOUTUBE')">
+        Youtube</a>
+
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
-                <a href="#/user/:uid" class="navbar-link">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
           <span class="glyphicon glyphicon-user">
           </span>
                 </a>
