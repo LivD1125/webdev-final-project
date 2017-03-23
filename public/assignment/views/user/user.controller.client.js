@@ -40,11 +40,12 @@
         init();
 
         function updateUser(newUser) {
+            console.log("updateUser");
             UserService
                 .updateUser(userId, newUser)
                 .success(function(user) {
                     if(user) {
-                        // do nothing
+                        vm.message = "User Successfully Updated";
                     } else {
                         vm.error = "error updating user";
                     }
@@ -55,7 +56,7 @@
                 .deleteUser(userId)
                 .success(function(user) {
                     if (user) {
-                        vm.mesage = "User Successfully Deleted";
+                        vm.message = "User Successfully Deleted";
                     } else {
                         vm.error = "Unable to Delete User";
                     }

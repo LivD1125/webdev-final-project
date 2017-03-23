@@ -59,12 +59,32 @@
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
                 templateUrl: "views/widget/widget-choose.view.client.html",
-                controller: "WidgetChooseController",
+                controller: "WidgetNewController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
                 templateUrl: "views/widget/widget-edit.view.client.html",
                 controller: "WidgetEditController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/heading", {
+                templateUrl: "views/widget/new-widgets/widget-heading-new.view.client.html",
+                controller: "WidgetNewHeadingController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/youtube", {
+                templateUrl: "views/widget/new-widgets/widget-youtube-new.view.client.html",
+                controller: "WidgetNewYoutubeController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/heading/html", {
+                templateUrl: "views/widget/new-widgets/widget-html-new.view.client.html",
+                controller: "WidgetNewHtmlController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/image", {
+                templateUrl: "views/widget/new-widgets/widget-image-new.view.client.html",
+                controller: "WidgetNewImageController",
                 controllerAs: "model"
             })
     }

@@ -5,7 +5,7 @@
         .controller("PageNewController", PageNewController)
         .controller("PageListController", PageListController);
 
-    function PageEditController($routeParams, PageService) {
+    function PageEditController($routeParams, $location, PageService) {
         var vm = this;
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
@@ -37,6 +37,7 @@
                 .updatePage(vm.pageId, page)
                 .success(function(page) {
                 vm.message = "Page Updated";
+                $location.url("/user/"+userId+"/website/"+websiteId+"/page");
                 })
                 .error(function(err) {
                 vm.error = "error updating page";
@@ -47,13 +48,13 @@
                 .deletePage(vm.pageId)
                 .success(function(page) {
                 vm.message = "Page Deleted!";
+                    $location.url("/user/"+userId+"/website/"+websiteId+"/page");
             }).error(function(err) {
                 vm.error = "Error Deleting Page";
             });
         }
-
     }
-    function PageNewController($routeParams, PageService) {
+    function PageNewController($routeParams, $location, PageService) {
         var websiteId = $routeParams.wid;
         var userId = $routeParams.uid;
         var vm = this;
@@ -70,9 +71,10 @@
 
         function createPage(page) {
             PageService
-                .createPage(page)
+                .createPage(websiteId, page)
                 .success(function(page) {
-                vm.message = "New Page Created";
+                    vm.message = "New Page Created";
+                    $location.url("/user/"+userId+"/website/"+websiteId+"/page");
                 })
                 .error(function(err) {
                     vm.error = "error creating page";

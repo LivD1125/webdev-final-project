@@ -13,7 +13,7 @@
         };
         return api;
 
-        function createWebsite(userId, website) {
+        function createWebsite(website, userId) {
             return $http.post("/api/user/"+userId+"/website", website);
         }
 
@@ -22,11 +22,11 @@
         }
 
         function updateWebsite(websiteId, website) {
-            return $http.put("/api/website/"+"websiteId", website);
+            return $http.put("/api/website/"+websiteId, website);
         }
 
         function deleteWebsite(websiteId) {
-            return $http.del("/api/website/"+websiteId);
+            return $http.delete("/api/website/"+websiteId);
         }
 
         function findWebsiteById(websiteId) {

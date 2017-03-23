@@ -5,7 +5,7 @@
         .controller("WebsiteNewController", WebsiteNewController)
         .controller("WebsiteListController", WebSiteListController);
 
-    function WebsiteEditController($routeParams, WebsiteService) {
+    function WebsiteEditController($routeParams, $location, WebsiteService) {
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
         var vm = this;
@@ -25,19 +25,21 @@
         init();
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(vm.websiteId, website).success(function(website) {
+            WebsiteService.updateWebsite(websiteId, website).success(function(website) {
                 vm.message = "Website Updated";
+                $location.url("/user/"+userId+"/website");
             });
         }
 
         function deleteWebsite() {
-            WebsiteService.deleteWebsite(vm.website).success(function(website) {
-                vm.message("Delete Website Successful");
+            WebsiteService.deleteWebsite(websiteId).success(function(website) {
+                vm.message = "Delete Website Successful";
+                $location.url("/user/"+userId+"/website");
             });
         }
     }
 
-    function WebsiteNewController($routeParams, WebsiteService) {
+    function WebsiteNewController($routeParams, $location, WebsiteService) {
         var userId = $routeParams.uid;
         var vm = this;
         // event handler
@@ -50,8 +52,9 @@
         }
         init();
         function createWebsite(website) {
-            WebsiteService.createWebsite(website).success(function(website) {
+            WebsiteService.createWebsite(website, userId).success(function(website) {
                 vm.message = "Website Created";
+                $location.url("/user/"+userId+"/website");
             });
         }
     }

@@ -20,6 +20,7 @@
         }
 
         function updateUser(userId, newUser) {
+            console.log('http update')
             return $http.put("/api/user/"+userId, newUser);
         }
 

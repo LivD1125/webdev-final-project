@@ -22,9 +22,9 @@
 </nav>
 <div class="container">
     <div class="list-of-websites" ng-repeat="website in model.websites">
-        <a href="#/user/{{website.developerId}}/website/{{website._id}}/page" class="website-name">{{website.name}}</a>
+        <a href="#/user/{{website._user}}/website/{{website._id}}/page" class="website-name">{{website.name}}</a>
         <p class="pull-right website-settings">
-            <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="navbar-link">
+            <a href="#/user/{{website._user}}/website/{{website._id}}" class="navbar-link">
           <span class="glyphicon glyphicon-cog edit-site">
           </span>
             </a>

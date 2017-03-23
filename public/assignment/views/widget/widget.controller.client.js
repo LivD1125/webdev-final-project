@@ -3,7 +3,11 @@
         .module("WebAppMaker")
         .controller("WidgetListController", WidgetListController)
         .controller("WidgetEditController", WidgetEditController)
-        .controller("WidgetNewController", WidgetNewController);
+        .controller("WidgetNewController", WidgetNewController)
+        .controller("WidgetNewHeadingController", WidgetNewHeadingController)
+        .controller("WidgetNewYoutubeController", WidgetNewYoutubeController)
+        .controller("WidgetNewImageController", WidgetNewImageController)
+        .controller("WidgetNewHtmlController", WidgetNewHtmlController);
 
     function WidgetListController($sce, $routeParams, WidgetService) {
         var vm = this;
@@ -38,7 +42,7 @@
             return $sce.trustAsResourceUrl(baseUrl);
         }
     }
-    function WidgetEditController($routeParams, WidgetService) {
+    function WidgetEditController($routeParams, $location, WidgetService) {
         var vm = this;
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
@@ -75,19 +79,32 @@
 
     }
 
-    function WidgetNewController($sce, $routeParams, WidgetService) {
+    function WidgetNewController($sce, $routeParams, $location, WidgetService) {
         var vm = this;
         vm.doYouTrustUrl = doYouTrustUrl;
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
+        // use this
+        vm.createWid = createWid;
         function init() {
             WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
                 vm.widgets = widgets;
             });
         }
-        vm.widgets =
+
+        function createWid(type) {
+            if (type==="HEADER") {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/heading");
+            } else if (type==="YOUTUBE") {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/youtube");
+            } else if (type==="IMAGE") {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/image");
+
+            }
+
+        }
 
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";
@@ -96,5 +113,39 @@
             baseUrl += id;
             return $sce.trustAsResourceUrl(baseUrl);
         }
+    }
+
+    function WidgetNewHeadingController($routeParams, $location, WidgetService) {
+        console.log("HERE");
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+        vm.type = "HEADING";
+    }
+
+    function WidgetNewImageController($routeParams, $location, WidgetService) {
+        console.log("HERE");
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+        vm.type = "HEADING";
+    }
+    function WidgetNewYoutubeController($routeParams, $location, WidgetService) {
+        console.log("HERE");
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+        vm.type = "HEADING";
+    }
+    function WidgetNewHtmlController($routeParams, $location, WidgetService) {
+        console.log("HERE");
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+        vm.type = "HEADING";
     }
 })();

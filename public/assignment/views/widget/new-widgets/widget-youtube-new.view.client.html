@@ -1,0 +1,49 @@
+<nav class="navbar navbar-default navbar-fixed-top pages">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
+                  <span class="glyphicon glyphicon-menu-left">
+                  </span>
+                </a>
+            </p>
+            <a class="navbar-brand navbar-label navbar-text navbar-brand-centered" href="#">
+                Create Youtube Widget
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" class="form-control" id="name" placeholder="Blog Post">
+    </div>
+    <div class="form-group">
+        <label for="text">Text</label>
+        <input type="text" class="form-control" id="text" placeholder="Text">
+    </div>
+    <div class="form-group">
+        <label for="url">Url</label>
+        <input type="text" class="form-control" id="url" placeholder="Url">
+    </div>
+    <div class="form-group">
+        <label for="width">Width</label>
+        <input type="text" class="form-control" id="width" placeholder="Width">
+    </div>
+    <a class="btn btn-primary btn-block"
+       ng-click="model.createWidget()">Create</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom pages">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centered">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+          <span class="glyphicon glyphicon-user">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
