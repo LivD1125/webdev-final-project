@@ -77,14 +77,19 @@
                 controller: "WidgetNewYoutubeController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/new/heading/html", {
-                templateUrl: "views/widget/new-widgets/widget-html-new.view.client.html",
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/html", {
+                templateUrl: "views/widget/new-widgets/widget-html-new-view.client.html",
                 controller: "WidgetNewHtmlController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new/image", {
                 templateUrl: "views/widget/new-widgets/widget-image-new.view.client.html",
                 controller: "WidgetNewImageController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/new/text", {
+                templateUrl: "views/widget/new-widgets/widget-text-new.view.client.html",
+                controller: "WidgetNewTextController",
                 controllerAs: "model"
             })
     }

@@ -7,7 +7,8 @@
         .controller("WidgetNewHeadingController", WidgetNewHeadingController)
         .controller("WidgetNewYoutubeController", WidgetNewYoutubeController)
         .controller("WidgetNewImageController", WidgetNewImageController)
-        .controller("WidgetNewHtmlController", WidgetNewHtmlController);
+        .controller("WidgetNewHtmlController", WidgetNewHtmlController)
+        .controller("WidgetNewTextController", WidgetNewTextController);
 
     function WidgetListController($sce, $routeParams, WidgetService) {
         var vm = this;
@@ -88,21 +89,25 @@
         vm.pageId = $routeParams.pid;
 
         // use this
-        vm.createWid = createWid;
+        vm.routeChoose = routeChoose;
         function init() {
             WidgetService.findWidgetByPageId(vm.pageId).success(function(widgets) {
                 vm.widgets = widgets;
             });
         }
 
-        function createWid(type) {
+        function routeChoose(type) {
             if (type==="HEADER") {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/heading");
             } else if (type==="YOUTUBE") {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/youtube");
             } else if (type==="IMAGE") {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/image");
-
+            } else if (type==="TEXT") {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/text");
+            } else if (type==="HTML") {
+                console.log('html');
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/new/html");
             }
 
         }
@@ -129,7 +134,7 @@
             widget.type = "HEADER";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
-                $location.url("/user/"+vm.userId+"/website/page/"+vm.pageId+"/widget");
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             });
         }
     }
@@ -146,7 +151,7 @@
             widget.type = "IMAGE";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
-                $location.url("/user/"+vm.userId+"/website/page/"+vm.pageId+"/widget/");
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/");
             });
         }
     }
@@ -162,7 +167,24 @@
             widget.type = "YOUTUBE";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
-                $location.url("/user/"+vm.userId+"/website/page/"+vm.pageId+"/widget/");
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/");
+            });
+        }
+    }
+
+    function WidgetNewTextController($routeParams, $location, WidgetService) {
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+
+        vm.createWidget = createWidget;
+
+        function createWidget(widget) {
+            widget.type = "TEXT";
+            WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
+                vm.message = "Widget Created";
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/");
             });
         }
     }
@@ -178,7 +200,7 @@
             widget.type = "HTML";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
-                $location.url("/user/"+vm.userId+"/website/page/"+vm.pageId+"/widget/");
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/");
             });
         }
 

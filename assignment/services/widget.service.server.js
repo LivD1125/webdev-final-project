@@ -8,26 +8,20 @@ module.exports = function (app) {
     app.get('/api/widget/:widgetId', findWidgetById);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
-    // app.put("/api/page/:pageId/widget?initial=initial&final=final", sortWidgets);
+    app.put("/api/page/:pageId/widget*", sortWidgets);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 
-    // function sortWidgets(req, res) {
-    //     console.log('request');
-    //     var pageId = req.params.pageId;
-    //     var initial = req.query.initial;
-    //     var final = req.query.final;
-    //
-    //     var widg = [];
-    //     for (var w in widgets) {
-    //         if(pageId === widgets[w].pageId) {
-    //             widg.push(widgets[w]);
-    //         }
-    //     }
-    //     widgets.splice(final, 0, widgets[initial]);
-    //     widgets.splice(initial, 1);
-    //     res.json(widgets);
-    // }
+    function sortWidgets(req, res) {
+        console.log('request');
+        var pageId = req.params.pageId;
+        var initial = req.query.initial;
+        var final = req.query.final;
+        model
+            .reorderWidgets(pageId, initial, final).then(function(widgets) {
+                res.json(widgets);
+        });
+    }
 
     function createWidget(req, res) {
         model
@@ -85,9 +79,12 @@ module.exports = function (app) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        widget = getWidgetById(widgetId);
-        widget.url = '/uploads/'+filename;
-
+        model.findWidgetById(widgetId).then(function(widget) {
+            widget.url = '/uploads/'+filename;
+            model.updateWidget(widgetId, widget).then(function(status) {
+                res.json(status);
+            });
+        });
         var callbackUrl   = "/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId;
 
         res.redirect(callbackUrl);

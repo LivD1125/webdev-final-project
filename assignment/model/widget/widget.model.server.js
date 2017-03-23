@@ -8,8 +8,8 @@ module.exports = function (model) {
         findWidgetById: findWidgetById,
         findAllWidgetsForPage: findAllWidgetsForPage,
         deleteWidget: deleteWidget,
-        updateWidget: updateWidget
-        // reorderWidget: reorderWidget,
+        updateWidget: updateWidget,
+        reorderWidgets: reorderWidgets
     };
     return api;
 
@@ -77,6 +77,24 @@ module.exports = function (model) {
                 deferred.resolve(widg);
             }
         });
+        return deferred.promise;
+    }
+
+    function reorderWidgets(pageId, initial, final) {
+        var deferred = q.defer();
+        findAllWidgetsForPage(pageId).then(function(widgets) {
+            widgets.splice(final, 0, widgets[initial]);
+            widgets.splice(initial, 1);
+            console.log(widgets);
+            widgets.save(function(err, widg) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(widg);
+                }
+            });
+        });
+
         return deferred.promise;
     }
 };

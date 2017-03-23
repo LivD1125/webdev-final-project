@@ -8,18 +8,22 @@
                 </a>
             </p>
             <a class="navbar-brand navbar-label navbar-text navbar-brand-centered" href="#">
-                Create Html
+                Create Text Widget
             </a>
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
-    <!--<div ng-model="model.widget.text" text-angular-->
-         <!--ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],-->
-        <!--['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],-->
-        <!--['indent','outdent'],['html']]">-->
-    <!--</div>-->
+    Text
+    <input ng-model="model.widget.text" class="form-control"/>
+    Rows
+    <input ng-model="model.widget.rows" class="form-control" type="number"/>
+    Placeholder
+    <input ng-model="model.widget.placeholder" class="form-control"/>
+    Formatted
+    <input ng-model="model.widget.formatted" type="checkbox"/>
+    <a class="btn btn-primary btn-block"
+       ng-click="model.createWidget(model.widget)">Create</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom pages">
     <div class="container-fluid">
