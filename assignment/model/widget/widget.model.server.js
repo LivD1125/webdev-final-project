@@ -38,11 +38,16 @@ module.exports = function (model) {
 
     function updateWidget(widgetId, widget) {
         var deferred = q.defer();
-        websiteModel
+        widgetModel
             .update(
                 {_id: widgetId},
-                {$set: {name: website.name,
-                    description: website.description,
+                {$set: {name: widget.name,
+                    text: widget.text,
+                    url: widget.url,
+                    width: widget.width,
+                    height: widget.height,
+                    size: widget.size,
+                    description: widget.description,
                     dateCreated: Date.now()}},
                 function (err, status) {
                     deferred.resolve(status);

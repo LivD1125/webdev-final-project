@@ -50,6 +50,7 @@
         vm.widgetId = $routeParams.wgid;
 
         vm.deleteWidget = deleteWidget;
+        vm.updateWidget = updateWidget;
         function init() {
             WidgetService.findWidgetById(vm.widgetId).success(function(widget) {
                 vm.widget = widget;
@@ -61,13 +62,12 @@
         }
         init();
 
-        function updateWidget() {
+        function updateWidget(widget) {
             WidgetService.updateWidget(vm.widgetId, widget).success(function(widget) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             });
-
-
         }
+
         function getEditUrl(widgetType) {
             return 'widget-'+widgetType+'-editor.view.client.html';
         }
