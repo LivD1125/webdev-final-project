@@ -1,19 +1,19 @@
 <div class="container">
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="name" class="form-control" id="name" placeholder="Blog Post">
+        <input ng-model="model.widget.name" type="name" class="form-control" id="name" placeholder="Blog Post">
     </div>
     <div class="form-group">
         <label for="text">Text</label>
-        <input type="text" class="form-control" id="text" placeholder="Text">
+        <input ng-model="model.widget.text" type="text" class="form-control" id="text" placeholder="Text">
     </div>
     <div class="form-group">
         <label for="url">Url</label>
-        <input type="text" class="form-control" id="url" placeholder="Url">
+        <input ng-model="model.widget.url" type="text" class="form-control" id="url" placeholder="Url">
     </div>
     <div class="form-group">
         <label for="width">Width</label>
-        <input type="text" class="form-control" id="width" placeholder="Width">
+        <input ng-model="model.widget.width" type="text" class="form-control" id="width" placeholder="Width">
     </div>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWebsite()">Delete</a>

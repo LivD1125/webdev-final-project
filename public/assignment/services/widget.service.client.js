@@ -27,7 +27,7 @@
             return $http.put("/api/widget/"+widgetId, widget);
         }
         function deleteWidget(widgetId) {
-            return $http.del("/api/widget/"+widgetId);
+            return $http.delete("/api/widget/"+widgetId);
         }
         function sortWidgetList(pageId, initial, final) {
             console.log('sortWidgetList');

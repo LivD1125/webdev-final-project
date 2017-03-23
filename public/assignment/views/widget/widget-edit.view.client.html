@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left nav-left-glyph navbar-brand navbar-brand-centered">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
                   <span class="glyphicon glyphicon-menu-left">
                   </span>
                 </a>
@@ -11,8 +11,8 @@
                 Edit Widget
             </a>
             <p class="navbar-text pull-right nav-right-glyph navbar-brand navbar-brand-centereds">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
-          <span class="glyphicon glyphicon-plus">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+          <span class="glyphicon glyphicon-check">
           </span>
                 </a>
             </p>
@@ -22,8 +22,8 @@
 
 
 <div class="container-fluid">
-    <div ng-switch="model.widget.widgetType">
-        <div ng-switch-when="HEADER">
+    <div ng-switch="model.widget.type[0]">
+        <div ng-switch-when="HEADING">
             <div ng-include="'views/widget/widget-heading.view.client.html'"></div>
         </div>
         <div ng-switch-when="YOUTUBE">
