@@ -1,2 +1,5 @@
 node_modules
 .idea
+*.zip
+*.ini
+angular-1.5.6

@@ -8,8 +8,8 @@
     "express": "^4.13.4",
     "mongoose": "^4.4.15",
     "q": "^1.4.1",
-    "multer": "^1.2.0",
-    "textangular": "^1.5.16"
+    "multer": "^1.2.0"
+//    "textangular": "^1.5.16"
   },
   "devDependencies": {},
   "scripts": {
