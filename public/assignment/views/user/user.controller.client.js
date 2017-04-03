@@ -5,29 +5,34 @@
         .controller("ProfileController", ProfileController)
         .controller("RegisterController", RegisterController);
 
-    function LoginController($location, UserService) {
+    function LoginController($location, $rootScope, UserService) {
         var vm = this;
         //event handlers
         vm.login = login;
 
         function login(user) {
-            var promise = UserService
-                .findUserByCredentials(user.username, user.password);
-            promise.success(function(user){
-                if(user) {
-                    $location.url("/user/"+user._id);
-                } else {
-                    vm.error = "User not found";
-                }
-            });
+            UserService
+                .login(user)
+                .success(
+                    function(response) {
+                        $rootScope.currentUser = user;
+                        $location.url("/user/"+response._id);
+                    })
+                .error(
+                    function(response) {
+                        vm.error = "Username or Password Incorrect";
+                    }
+                );
+
         }
     }
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, $location, $rootScope, UserService) {
         var vm = this;
 
         // event handlers
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
+        vm.logout = logout;
 
         var userId = $routeParams.uid;
 
@@ -39,18 +44,28 @@
         }
         init();
 
-        function updateUser(newUser) {
-            console.log("updateUser");
+        function logout() {
             UserService
-                .updateUser(userId, newUser)
-                .success(function(user) {
-                    if(user) {
-                        vm.message = "User Successfully Updated";
-                    } else {
-                        vm.error = "error updating user";
-                    }
-            });
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                        vm.message = "Logout Successful";
+                    });
         }
+
+            function updateUser(newUser) {
+                UserService
+                    .updateUser(userId, newUser)
+                    .success(function(user) {
+                        if(user) {
+                            vm.message = "User Successfully Updated";
+                        } else {
+                            vm.error = "error updating user";
+                        }
+                });
+            }
         function deleteUser(userId) {
             UserService
                 .deleteUser(userId)
@@ -63,24 +78,36 @@
             });
         }
     }
-    function RegisterController($location, UserService) {
+    function RegisterController($location, $rootScope, UserService) {
         var vm = this;
 
         // event handlers
         vm.createUser = createUser;
+        vm.register = register;
 
 
         function createUser(newUser) {
             console.log('createUser');
             UserService
                 .createUser(newUser)
-                .success(function(user) {
+                .success(function (user) {
                     vm.message = "Available";
                     $location.url('/user/' + user._id);
                 })
-                .error(function(err) {
+                .error(function (err) {
                     vm.message = "Username already taken";
-            });;
+                });
         }
+        function register(user) {
+            UserService
+                .register(user)
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/" + user._id);
+                    });
+        }
+
     }
 })();

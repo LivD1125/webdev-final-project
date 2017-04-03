@@ -10,17 +10,32 @@
             "findUserById": findUserById,
             "updateUser": updateUser,
             "createUser": createUser,
-            "deleteUser": deleteUser
+            "deleteUser": deleteUser,
+            "login": login,
+            "logout": logout,
+            "loggedin": loggedin,
+            "register": register
         };
         return api;
 
+        function login(user) {
+            return $http.post("/api/login", user);
+        }
 
+        function loggedin(user) {
+            return $http.get("/api/loggedin", user);
+        }
+        function logout(user) {
+            return $http.post("/api/logout");
+        }
+        function register(user) {
+            return $http.post("/api/register", user);
+        }
         function findUserByUsername(username) {
             return $http.get("/api/user?username="+username);
         }
 
         function updateUser(userId, newUser) {
-            console.log('http update')
             return $http.put("/api/user/"+userId, newUser);
         }
 
