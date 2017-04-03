@@ -12,7 +12,9 @@ module.exports = function (model) {
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         deleteUser: deleteUser,
-        updateUser: updateUser
+        updateUser: updateUser,
+        findUserByFacebookId: findUserByFacebookId
+
     };
     return api;
 
@@ -28,6 +30,10 @@ module.exports = function (model) {
                 }
             });
         return deferred.promise;
+    }
+
+    function findUserByFacebookId(facebookId) {
+        return userModel.findOne({'facebook.id': facebookId});
     }
 
     function findUserByUsername(uname) {

@@ -64,6 +64,10 @@
         init();
 
         function updateWidget(widget) {
+            if (!widget || !widget.name) {
+                vm.error = "widget name is required";
+                return;
+            }
             WidgetService.updateWidget(vm.widgetId, widget).success(function(widget) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             });
@@ -122,7 +126,6 @@
     }
 
     function WidgetNewHeadingController($routeParams, $location, WidgetService) {
-        console.log("HERE");
         var vm = this;
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
@@ -131,6 +134,10 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
+            if (!widget || !widget.name) {
+                vm.error = "widget name is required";
+                return;
+            }
             widget.type = "HEADER";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
@@ -148,6 +155,10 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
+            if (!widget || !widget.name) {
+                vm.error = "widget name is required";
+                return;
+            }
             widget.type = "IMAGE";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
@@ -164,6 +175,10 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
+            if (!widget || !widget.name) {
+                vm.error = "widget name is required";
+                return;
+            }
             widget.type = "YOUTUBE";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
@@ -181,6 +196,10 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
+            if (!widget || !widget.name) {
+                vm.error = "widget name is required";
+                return;
+            }
             widget.type = "TEXT";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";
@@ -197,6 +216,10 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
+            if (!widget || !widget.name) {
+                vm.error = "widget name is required";
+                return;
+            }
             widget.type = "HTML";
             WidgetService.createWidget(vm.pageId, widget).success(function(widg) {
                 vm.message = "Widget Created";

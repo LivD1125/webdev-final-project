@@ -14,6 +14,13 @@
     </div>
 </nav>
 <div class="container-fluid">
+    <div class="alert alert-danger" ng-show="model.error">
+        {{model.error}}
+    </div>
+
+    <div class="alert alert-info" ng-show="model.message">
+        {{model.message}}
+    </div>
     Text
     <input ng-model="model.widget.text" class="form-control"/>
     Rows

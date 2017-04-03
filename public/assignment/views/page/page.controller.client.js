@@ -33,6 +33,10 @@
         init();
 
         function updatePage(page) {
+            if (!page || !page.name) {
+                vm.error = "page name is required";
+                return;
+            }
             PageService
                 .updatePage(vm.pageId, page)
                 .success(function(page) {
@@ -70,6 +74,10 @@
         init();
 
         function createPage(page) {
+            if (!page || !page.name) {
+                vm.error = "page name is required";
+                return;
+            }
             PageService
                 .createPage(websiteId, page)
                 .success(function(page) {

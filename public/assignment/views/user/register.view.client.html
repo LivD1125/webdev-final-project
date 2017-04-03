@@ -1,4 +1,12 @@
 <div class="container-fluid">
+    <div class="alert alert-danger" ng-show="model.error">
+        {{model.error}}
+    </div>
+
+    <div class="alert alert-info" ng-show="model.message">
+        {{model.message}}
+        {{model.user}}
+    </div>
     <h1>Register</h1>
 
     <label for="username">Username</label>
@@ -16,10 +24,12 @@
 
     <label for="password2">Validate Password</label>
     <input id="password2"
+           ng-model="model.validatepassword"
            class="form-control"
            type="password"
            placeholder="req4321"/>
 
-    <a ng-click="model.register(model.user)" class="btn btn-primary btn-block">Register</a>
+    <a ng-click="model.register(model.user, model.validatepassword)" class="btn btn-primary btn-block">Register</a>
     <a href="#/login" class="btn btn-danger btn-block">Cancel</a>
+
 </div>

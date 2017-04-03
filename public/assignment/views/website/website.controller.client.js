@@ -25,6 +25,10 @@
         init();
 
         function updateWebsite(website) {
+            if (!website || !website.name) {
+                vm.error = "Website Name is Required";
+                return;
+            }
             WebsiteService.updateWebsite(websiteId, website).success(function(website) {
                 vm.message = "Website Updated";
                 $location.url("/user/"+userId+"/website");
@@ -52,6 +56,10 @@
         }
         init();
         function createWebsite(website) {
+            if (!website || !website.name) {
+                vm.error = "Website Name is Required";
+                return;
+            }
             WebsiteService.createWebsite(website, userId).success(function(website) {
                 vm.message = "Website Created";
                 $location.url("/user/"+userId+"/website");

@@ -11,6 +11,10 @@
         vm.login = login;
 
         function login(user) {
+            if (!user || !user.username || !user.password) {
+                vm.error = "Username and Password Required";
+                return;
+            }
             UserService
                 .login(user)
                 .success(
@@ -87,7 +91,6 @@
 
 
         function createUser(newUser) {
-            console.log('createUser');
             UserService
                 .createUser(newUser)
                 .success(function (user) {
@@ -98,7 +101,15 @@
                     vm.message = "Username already taken";
                 });
         }
-        function register(user) {
+        function register(user, validatepassword) {
+            if (!user ||
+                !user.username ||
+                !user.password ||
+                !validatepassword ||
+                user.password !== validatepassword) {
+                vm.error = "Username, Password required. Validation must match";
+                return;
+            }
             UserService
                 .register(user)
                 .then(

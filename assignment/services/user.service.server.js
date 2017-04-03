@@ -1,11 +1,19 @@
 module.exports = function (app) {
     var model = require('../model/user/user.model.server')();
     var passport = require('passport');
+    var bcrypt = require("bcrypt-nodejs");
     var LocalStrategy = require('passport-local').Strategy;
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+    var FacebookStrategy = require('passport-facebook').Strategy;
 
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID || 494222524301662,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET || 'e5007b91c5a623dd3e5c78acb3ee0f9f',
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:3000/auth/facebook/callback'
+    };
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     // app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.get("/api/user?username=username", findUserByUsername);
@@ -17,6 +25,13 @@ module.exports = function (app) {
     app.get("/api/loggedin", loggedin);
     app.post('/api/logout', logout);
     app.delete("/api/user/:userId", deleteUser);
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/assignment/#/user',
+            failureRedirect: '/assignment/#/login'
+        }));
 
     function updateUser(req, res) {
         model
@@ -71,6 +86,7 @@ module.exports = function (app) {
     }
     function register(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         model
             .createUser(user)
             .then(function (user) {
@@ -99,13 +115,14 @@ module.exports = function (app) {
     }
     function localStrategy(username, password, done) {
         model
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
                         return done(null, false);
                     }
-                    return done(null, user);
                 },
                 function(err) {
                     if (err) { return done(err); }
@@ -115,7 +132,7 @@ module.exports = function (app) {
 
 
     function serializeUser(user, done) {
-        done(null, user);
+        return done(null, user);
     }
 
     function deserializeUser(user, done) {
@@ -123,12 +140,42 @@ module.exports = function (app) {
             .findUserById(user._id)
             .then(
                 function(user){
-                    done(null, user);
+                    return done(null, user);
                 },
                 function(err){
-                    done(err, null);
+                    return done(err, null);
                 }
             );
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        model
+            .findUserByFacebookId(profile.id)
+            .then(function(user) {
+                if (user) {
+                    console.log('found user facebook');
+                    console.log(user);
+                    return done(null, user);
+                }
+                else {
+                    var newUser = new User();
+                    newUser.facebook.id = profile.id;
+                    newUser.facebook.token = token;
+                    newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                    newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
+
+                    newUser.save(function (err) {
+                        if (err)
+                            throw err;
+                        return done(null, newUser);
+                    });
+                }
+            },
+            function(err) {
+                if(err) {
+                    return done(err);
+                }
+            });
     }
 
 };
