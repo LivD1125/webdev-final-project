@@ -1,6 +1,6 @@
 module.exports = function (app) {
-    var multer = require('multer'); // npm install multer --save
-    var upload = multer({ dest: 'services'+'/../../public/uploads' });
+    // var multer = require('multer'); // npm install multer --save
+    // var upload = multer({ dest: 'services'+'/../../public/uploads' });
     var model = require('../model/widget/widget.model.server')();
 
     app.post('/api/page/:pageId/widget', createWidget);
@@ -9,7 +9,7 @@ module.exports = function (app) {
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
     app.put("/api/page/:pageId/widget*", sortWidgets);
-    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    // app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 
     function sortWidgets(req, res) {
