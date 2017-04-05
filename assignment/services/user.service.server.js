@@ -9,17 +9,16 @@ module.exports = function (app) {
     var FacebookStrategy = require('passport-facebook').Strategy;
 
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID || 494222524301662,
+        clientID     : process.env.FACEBOOK_CLIENT_ID || '494222524301662',
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET || 'e5007b91c5a623dd3e5c78acb3ee0f9f',
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:3000/auth/facebook/callback'
     };
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    // app.get("/api/user", findUser);
-    app.get("/api/user/:userId", findUserById);
+    app.get('/api/user', findUserByUsername);
+    app.get('/api/user/:userId', findUserById);
     app.get("/api/user?username=username", findUserByUsername);
     app.get("/api/user?username=username&password=password", findUserByCredentials);
     app.put("/api/user/:userId", updateUser);
-    app.post("/api/user", createUser);
     app.post("/api/login", passport.authenticate('local'), login);
     app.post("/api/register", register);
     app.get("/api/loggedin", loggedin);
@@ -41,16 +40,6 @@ module.exports = function (app) {
             });
     }
 
-    function createUser(req, res) {
-        model
-            .createUser(req.body)
-            .then(function (user) {
-                console.log('service');
-                console.log(user);
-                res.json(user);
-            });
-    }
-
     function deleteUser(req, res) {
         model
             .deleteUser(req.params.userId)
@@ -68,14 +57,14 @@ module.exports = function (app) {
     }
 
     function findUserByCredentials(req, res) {
-        model.findUserByCredentials(req.query.username, req.query.password)
+        model.findUserByCredentials(req.query.username.toLocaleLowerCase(), req.query.password)
             .then(function (user) {
                 res.json(user);
             });
     }
 
     function findUserByUsername(req, res) {
-        model.findUserByUsername(req.query.username)
+        model.findUserByUsername(req.query.username.toLocaleLowerCase())
             .then(function (user) {
                 if (user) {
                     res.json(user);
@@ -86,6 +75,7 @@ module.exports = function (app) {
     }
     function register(req, res) {
         var user = req.body;
+        user.username = user.username.toLocaleLowerCase();
         user.password = bcrypt.hashSync(user.password);
         model
             .createUser(user)
@@ -115,7 +105,7 @@ module.exports = function (app) {
     }
     function localStrategy(username, password, done) {
         model
-            .findUserByUsername(username)
+            .findUserByUsername(username.toLocaleLowerCase())
             .then(
                 function(user) {
                     if (user && bcrypt.compareSync(password, user.password)) {
@@ -152,24 +142,28 @@ module.exports = function (app) {
         model
             .findUserByFacebookId(profile.id)
             .then(function(user) {
-                if (user) {
-                    console.log('found user facebook');
-                    console.log(user);
-                    return done(null, user);
-                }
-                else {
-                    var newUser = new User();
-                    newUser.facebook.id = profile.id;
-                    newUser.facebook.token = token;
-                    newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-                    newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
-
-                    newUser.save(function (err) {
-                        if (err)
-                            throw err;
-                        return done(null, newUser);
-                    });
-                }
+                    if (!user) {
+                        var newUser = {
+                            username: profile.displayName.toLocaleLowerCase().replace(/\s+/g, '_'),
+                            password: profile.id.toString(),
+                            firstName: profile.displayName,
+                            facebook: {
+                                id: profile.id,
+                                token: token
+                            }
+                        };
+                        model
+                            .createUser(newUser)
+                            .then(
+                                function (user) {
+                                    return done(null, user);
+                                },
+                                function (error) {
+                                    return done(error, null);
+                                });
+                    } else {
+                        return done(null, user);
+                    }
             },
             function(err) {
                 if(err) {
@@ -177,5 +171,16 @@ module.exports = function (app) {
                 }
             });
     }
+
+    function findCurrentUser(req, res) {
+        if (req.user) {
+            res.json(stripPassword(req.user));
+        } else {
+            res
+                .status(404)
+                .json(['Failed to find current login session. Please try logging out and in again.']);
+        }
+    }
+
 
 };

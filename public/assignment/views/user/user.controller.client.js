@@ -38,16 +38,16 @@
         vm.deleteUser = deleteUser;
         vm.logout = logout;
 
-        var userId = $routeParams.uid;
+        vm.userId = $rootScope.currentUser._id;
 
         function init() {
-            var promise = UserService.findUserById(userId);
+            var promise = UserService.findUserById(vm.userId);
             promise.success(function(user){
                 vm.user = user;
             });
         }
         init();
-
+        console.log(vm.user);
         function logout() {
             UserService
                 .logout()
