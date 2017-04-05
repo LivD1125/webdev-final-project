@@ -103,3 +103,7 @@ body {
 .login-left {
     margin-right: 1rem;
 }
+
+.pull-right {
+    cursor: pointer;
+}
