@@ -20,7 +20,7 @@
                 .success(
                     function(response) {
                         $rootScope.currentUser = user;
-                        $location.url("/user/"+response._id);
+                        $location.url("/user/");
                     })
                 .error(
                     function(response) {
@@ -95,7 +95,7 @@
                 .createUser(newUser)
                 .success(function (user) {
                     vm.message = "Available";
-                    $location.url('/user/' + user._id);
+                    $location.url('/user/');
                 })
                 .error(function (err) {
                     vm.message = "Username already taken";
