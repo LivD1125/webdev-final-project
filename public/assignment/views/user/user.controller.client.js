@@ -86,21 +86,8 @@
         var vm = this;
 
         // event handlers
-        vm.createUser = createUser;
         vm.register = register;
 
-
-        function createUser(newUser) {
-            UserService
-                .createUser(newUser)
-                .success(function (user) {
-                    vm.message = "Available";
-                    $location.url('/user/');
-                })
-                .error(function (err) {
-                    vm.message = "Username already taken";
-                });
-        }
         function register(user, validatepassword) {
             if (!user ||
                 !user.username ||
@@ -116,7 +103,7 @@
                     function (response) {
                         var user = response.data;
                         $rootScope.currentUser = user;
-                        $location.url("/user/" + user._id);
+                        $location.url("/user/");
                     });
         }
 
