@@ -64,8 +64,11 @@
         init();
 
         function updateWidget(widget) {
-            if (!widget || !widget.name) {
+            if (widget.type !== "TEXT" && (!widget || !widget.name)) {
                 vm.error = "widget name is required";
+                return;
+            } else if (widget.type === "TEXT" && (!widget || !widget.text)) {
+                vm.error = "widget text is required";
                 return;
             }
             WidgetService.updateWidget(vm.widgetId, widget).success(function(widget) {
