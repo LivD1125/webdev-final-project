@@ -47,7 +47,7 @@
             });
         }
         init();
-        console.log(vm.user);
+
         function logout() {
             UserService
                 .logout()
@@ -61,7 +61,7 @@
 
             function updateUser(newUser) {
                 UserService
-                    .updateUser(userId, newUser)
+                    .updateUser(vm.userId, newUser)
                     .success(function(user) {
                         if(user) {
                             vm.message = "User Successfully Updated";
@@ -70,9 +70,9 @@
                         }
                 });
             }
-        function deleteUser(userId) {
+        function deleteUser() {
             UserService
-                .deleteUser(userId)
+                .deleteUser(vm.userId)
                 .success(function(user) {
                     if (user) {
                         vm.message = "User Successfully Deleted";
