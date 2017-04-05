@@ -196,8 +196,8 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
-            if (!widget || !widget.name) {
-                vm.error = "widget name is required";
+            if (!widget || !widget.text) {
+                vm.error = "widget text is required";
                 return;
             }
             widget.type = "TEXT";
