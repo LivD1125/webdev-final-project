@@ -11,7 +11,7 @@ module.exports = function (app) {
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID || '494222524301662',
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET || 'e5007b91c5a623dd3e5c78acb3ee0f9f',
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:3000/auth/facebook/callback'
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
     };
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     app.get('/api/user', findUserByUsername);
