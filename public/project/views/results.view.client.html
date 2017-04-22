@@ -7,7 +7,7 @@
                 <img src="{{result.recipe.image}}" class="img-responsive img-thumbnail"/>
             </div>
             <div class="col-sm-4">
-                <a href="model.seeDetails(result.recipe.image)"><h4>{{result.recipe.label}}</h4></a>
+                <a ng-click="model.seeDetails(result.recipe)"><h4>{{result.recipe.label}}</h4></a>
                 <ul ng-repeat="label in result.recipe.healthLabels">
                     <li>{{label}}</li>
                 </ul>

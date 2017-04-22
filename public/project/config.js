@@ -48,9 +48,14 @@
             controller: "ResultsController",
             controllerAs: "model"
         }).
-        when('/recipe/:name', {
+        when('/recipe/:id', {
             templateUrl: "views/recipe.view.client.html",
             controller: "RecipeController",
+            controllerAs: "model"
+        }).
+        when('/weather', {
+            templateUrl: "views/weather.view.client.html",
+            controller: "WeatherController",
             controllerAs: "model"
         });
 

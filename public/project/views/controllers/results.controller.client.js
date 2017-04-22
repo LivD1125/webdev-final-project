@@ -3,7 +3,8 @@
         .module("FinalWebAppMaker")
         .controller("ResultsController", ResultsController);
 
-    function ResultsController($routeParams, $location, $rootScope, UserService, ExternalService) {
+    function ResultsController($routeParams, $location, $rootScope,
+                               UserService, ExternalService, RecipeService) {
         var vm = this;
 
         // event handlers
@@ -27,7 +28,11 @@
                 vm.searchQ = $rootScope.query;
         }
         function seeDetails(recipe) {
-            $rootScope.currentRecipe = recipe;
+            RecipeService.saveRecipe(recipe).then(function(res) {
+                $rootScope.currentRecipe = recipe;
+                $location('/recipe' + res.data);
+            });
+
         }
 
         function logout() {
