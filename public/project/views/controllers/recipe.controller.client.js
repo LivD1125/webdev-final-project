@@ -10,11 +10,9 @@
         // event handlers
         vm.logout = logout;
         vm.likePage = likePage;
-        vm.logText = "Login";
         vm.logAction = logout;
         vm.userId = $rootScope.currentUser._id;
         vm.logText = "Logout";
-        vm.logAction = logout;
 
         function init() {
             var promise = RecipeService.findRecipeById(vm.recipeId);
@@ -33,7 +31,7 @@
                     vm.isLikedAction = "";
                 } else {
                     vm.isLiked = "Like";
-                    vm.isLikedAction = "model.likePage()";
+                    vm.isLikedAction = likePage;
                 }
             });
 
@@ -52,10 +50,13 @@
 
         function likePage() {
             RecipeService.likePage(vm.recipeId, vm.userId).then(function(res) {
-                console.log("liked!");
-                vm.liked = "Liked";
+                vm.isLiked = "Liked";
+                vm.likeCount = vm.likeCount + 1;
                 vm.likedClass = "btn-success";
             });
+            UserService.likePage(vm.recipeId, vm.userId).then(function(res) {
+                console.log("go go go");
+            })
         }
     }
 })();

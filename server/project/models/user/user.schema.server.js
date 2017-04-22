@@ -9,7 +9,7 @@ module.exports = function () {
         email: String,
         phone: String,
         dateCreated: {type: Date, default: Date.now},
-        likedShows: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoShows'}],
+        recipes: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoRecipes'}],
         facebook: {
             id:    String,
             token: String

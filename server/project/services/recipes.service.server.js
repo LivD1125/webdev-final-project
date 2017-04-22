@@ -16,9 +16,7 @@ module.exports = function (app) {
         });
     }
     function saveRecipe(req, res) {
-        console.log(req.body.uri);
         var recipe = findRecipeByUrl(req.body.uri);
-        console.log(recipe);
         if (recipe === undefined) {
             model
                 .saveRecipe(req.body)
@@ -31,12 +29,9 @@ module.exports = function (app) {
     }
 
     function updateRecipe(req, res) {
-        console.log(req.params.recipeId);
-        console.log(req.body);
         model
             .updateRecipe(req.params.recipeId, req.body)
             .then(function (status) {
-                console.log(status);
                 res.json(status);
             });
     }

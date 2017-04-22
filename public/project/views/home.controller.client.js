@@ -28,9 +28,6 @@
             });
         }
 
-        function searchRecipes(query) {
-
-        }
         function logout() {
             UserService
                 .logout()

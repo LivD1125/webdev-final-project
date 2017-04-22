@@ -23,9 +23,13 @@
             });
         }
         init();
+
         function getResults() {
-                vm.showResults = $rootScope.data;
-                vm.searchQ = $rootScope.query;
+            ExternalService.searchResults($routeParams.query).then(function(res) {
+                vm.query = $routeParams.query;
+                vm.showResults = res.data;
+                vm.searchQ = $routeParams.query;
+            });
         }
         function seeDetails(recipe) {
             RecipeService.saveRecipe(recipe).then(function(res) {

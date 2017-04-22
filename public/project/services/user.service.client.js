@@ -14,7 +14,8 @@
             "login": login,
             "logout": logout,
             "loggedin": loggedin,
-            "register": register
+            "register": register,
+            "likePage": likePage
         };
         return api;
 
@@ -52,6 +53,13 @@
         }
         function deleteUser(userId) {
             return $http.delete("/api/project/user/" + userId);
+        }
+
+        function likePage(recipeId, userId) {
+            var id = {
+                recipeId: recipeId
+            };
+            return $http.put("/api/project/user/like/"+ userId, id);
         }
 
     }

@@ -25,12 +25,22 @@ module.exports = function (app) {
     app.post('/api/project/logout', logout);
     app.delete("/api/project/user/:userId", deleteUser);
     app.get ('/auth/project/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.put('/api/project/user/like/:userId', likeRecipe);
 
     app.get('/auth/project/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/project/#/user',
             failureRedirect: '/project/#/login'
         }));
+
+
+    function likeRecipe(req, res) {
+        model
+            .likeRecipe(req.params.userId, req.body)
+            .then(function (status) {
+                res.json(status);
+            });
+    }
 
     function updateUser(req, res)
     {
@@ -92,14 +102,11 @@ module.exports = function (app) {
     }
 
     function login(req, res) {
-        console.log('login');
-        console.log(req.user);
         var user = req.user;
         res.json(user);
     }
 
     function loggedin(req, res) {
-        console.log(req.isAuthenticated());
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 

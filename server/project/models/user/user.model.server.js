@@ -13,12 +13,28 @@ module.exports = function (model) {
         findUserByCredentials: findUserByCredentials,
         deleteUser: deleteUser,
         updateUser: updateUser,
-        findUserByFacebookId: findUserByFacebookId
+        findUserByFacebookId: findUserByFacebookId,
+        likeRecipe: likeRecipe
 
     };
     return api;
 
+    function likeRecipe(userId, recipeId) {
+        console.log(userId);
+        console.log(recipeId);
+        var deferred = q.defer();
+        userModel
+            .update(
+                {_id: userId},
+                {$push: {"recipes": recipeId.recipeId}},
+                function (err, status) {
+                    console.log(err);
+                    console.log(status);
+                    deferred.resolve(status);
 
+                });
+        return deferred.promise;
+    }
     function findUserById(userId) {
         var deferred = q.defer();
         userModel
