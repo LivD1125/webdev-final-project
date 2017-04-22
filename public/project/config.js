@@ -48,7 +48,7 @@
             controller: "ResultsController",
             controllerAs: "model"
         }).
-        when('/recipe/:id', {
+        when('/recipe/:recipeId', {
             templateUrl: "views/recipe.view.client.html",
             controller: "RecipeController",
             controllerAs: "model"

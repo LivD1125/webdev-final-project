@@ -3,32 +3,28 @@
         .module("FinalWebAppMaker")
         .controller("RecipeController", RecipeController);
 
-    function RecipeController($routeParams, $location, $rootScope, UserService, ExternalService) {
+    function RecipeController($routeParams, $location,
+                              $rootScope, UserService, RecipeService) {
         var vm = this;
-        vm.recipe = $rootScope.recipe;
+        vm.recipeId = $routeParams.recipeId;
         // event handlers
         vm.logout = logout;
-        vm.seeDetails = seeDetails;
+        vm.likePage = likePage;
+        vm.logText = "Login";
+        vm.logAction = logout;
         if ($rootScope.currentUser) {
             vm.userId = $rootScope.currentUser._id;
+            vm.logText = "Logout";
+            vm.logAction = logout;
         }
-        vm.logText = "Logout";
-        vm.logAction = logout;
+
         function init() {
-            getResults();
-            var promise = UserService.findUserById(vm.userId);
-            promise.success(function(user){
-                vm.user = user;
+            var promise = RecipeService.findRecipeById(vm.recipeId);
+            promise.success(function(recipe){
+                vm.recipe = recipe;
             });
         }
         init();
-        function getResults() {
-            vm.showResults = $rootScope.data;
-            vm.searchQ = $rootScope.query;
-        }
-        function seeDetails(recipe) {
-            $rootScope.currentRecipe = recipe;
-        }
 
         function logout() {
             UserService
@@ -43,7 +39,8 @@
         }
 
         function likePage() {
-            PageService.likePage(vm.userId, vm.showOverview).then(function(res) {
+            RecipeService.likePage(vm.recipeId, vm.userId).then(function(res) {
+                console.log("liked!");
                 vm.liked = "Liked";
                 vm.likedClass = "btn-success";
             });

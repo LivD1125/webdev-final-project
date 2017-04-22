@@ -30,7 +30,7 @@
         function seeDetails(recipe) {
             RecipeService.saveRecipe(recipe).then(function(res) {
                 $rootScope.currentRecipe = recipe;
-                $location('/recipe' + res.data);
+                $location.url('/recipe/' + res.data);
             });
 
         }

@@ -32,7 +32,8 @@ module.exports = function (app) {
             failureRedirect: '/project/#/login'
         }));
 
-    function updateUser(req, res) {
+    function updateUser(req, res)
+    {
         model
             .updateUser(req.params.userId, req.body)
             .then(function (status) {

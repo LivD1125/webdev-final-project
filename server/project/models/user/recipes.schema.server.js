@@ -9,14 +9,14 @@ module.exports = function () {
         url: String,
         shareAs: String,
         dateCreated: {type: Date, default: Date.now},
-        likes: Number,
         yield: Number,
         dietLabels: [String],
         healthLabels: [String],
         cautions: [String],
         ingredientLines: [String],
         calories: Number,
-        Comments: [String]
+        Comments: [String],
+        users: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoUsers'}]
     }, {collection: 'project.mongo.recipes'});
 
     return recipesSchema;

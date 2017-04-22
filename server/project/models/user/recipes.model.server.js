@@ -6,7 +6,10 @@ module.exports = function (model) {
     var recipeModel = mongoose.model('ProjectMongoRecipes', recipesSchema);
 
     var api = {
-        saveRecipe: saveRecipe
+        saveRecipe: saveRecipe,
+        findById: findById,
+        findByUrl: findByUrl,
+        updateRecipe: updateRecipe
     };
     return api;
 
@@ -22,15 +25,42 @@ module.exports = function (model) {
         return deferred.promise;
     }
 
+    function updateRecipe(recipeId, userId) {
+        console.log(recipeId);
+        console.log(userId);
+        var deferred = q.defer();
+        recipeModel
+            .update(
+                {_id: recipeId},
+                {$push: {"users": userId}},
+                function (err, status) {
+                    deferred.resolve(status);
+                });
+        return deferred.promise;
+    }
+
     function findByUrl(url) {
         var deferred = q.defer();
-        recipeModel.findOne({url: url}, function (err, status) {
+        recipeModel.findOne({uri: url}, function (err, status) {
             if (err) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(status);
             }
         });
+        return deferred.promise;
+    }
+
+    function findById(id) {
+        var deferred = q.defer();
+        recipeModel
+            .findById(id, function (err, recipe) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(recipe);
+                }
+            });
         return deferred.promise;
     }
 
