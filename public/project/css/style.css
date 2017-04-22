@@ -1,0 +1,37 @@
+.pointer {
+    cursor: pointer;
+}
+.btn-login {
+    background: #e5e5e5;
+    border-radius: .2rem;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e5e5e5;
+}
+.btn-login:link {
+    color: #3c3c3c;
+}
+
+.btn-login:active, .btn-login:hover {
+    background: #b2dba1;
+    color: #fff;
+}
+.btn-facebook {
+    background: #3B5998;
+    border-radius: .2rem;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #263961;
+}
+.btn-facebook:link, .btn-facebook:visited {
+    color: #fff;
+}
+.btn-facebook:active, .btn-facebook:hover {
+    background: #263961;
+    color: #fff;
+}
+.form {
+    padding: 1rem;
+}

@@ -85,7 +85,7 @@ module.exports = function (app) {
                 res.json(status);
             });
         });
-        var callbackUrl   = "/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId;
+        var callbackUrl   = "/server/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId;
 
         res.redirect(callbackUrl);
     }

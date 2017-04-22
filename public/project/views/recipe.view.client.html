@@ -1,0 +1,30 @@
+<div ng-include="'views/navbar.view.client.html'"></div>
+<!--<div class="container">-->
+<h1>Results: {{model.searchQ}}</h1>
+<div class="list-of-websites" ng-repeat="result in model.showResults.hits">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="{{result.recipe.image}}" class="img-responsive img-thumbnail"/>
+        </div>
+        <div class="col-sm-4">
+            <a href="model.seeDetails(result.recipe.image)"><h4>{{result.recipe.label}}</h4></a>
+            <ul ng-repeat="label in result.recipe.healthLabels">
+                <li>{{label}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+    <img class="img-responsive" src="{{model.recipe.image}}" />
+    <h3>Ingredients</h3>
+        <ul ng-repeat="ingredient in model.recipe.ingredientLines">
+            <li>ingredient</li>
+        </ul>
+    </div>
+    <!--<div class="col-md-6">-->
+    <!--<h1>{{model.showOverview.show_title}} ({{model.showOverview.release_year}})</h1>-->
+    <!--<p>{{model.showOverview.summary}}</p>-->
+    <!--</div>-->
+    <button type="button" ngClick="model.likePage()" class="btn btn-info pull-right">Like</button>
+</div>
+<!--</div>-->
+<div ng-include="'views/footer.view.client.html'"></div>

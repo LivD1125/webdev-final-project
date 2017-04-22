@@ -172,15 +172,5 @@ module.exports = function (app) {
             });
     }
 
-    function findCurrentUser(req, res) {
-        if (req.user) {
-            res.json(stripPassword(req.user));
-        } else {
-            res
-                .status(404)
-                .json(['Failed to find current login session. Please try logging out and in again.']);
-        }
-    }
-
 
 };
