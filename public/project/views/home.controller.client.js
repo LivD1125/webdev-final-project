@@ -27,6 +27,7 @@
                 $location.url("results/" + query);
             });
         }
+
         function searchRecipes(query) {
 
         }

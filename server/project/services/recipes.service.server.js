@@ -6,8 +6,15 @@ module.exports = function (app) {
     // app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
     // app.get('/api/page/:pageId', findPageById);
     app.put('/api/project/recipe/:recipeId', updateRecipe);
+    app.get('/api/project/recipe/like/:userId/:recipeId', isLiked);
     // app.delete('/api/page/:pageId', deletePage);
 
+
+    function isLiked(req, res) {
+        model.findLikes(req.params.userId, req.params.recipeId).then(function(likes) {
+            res.json(likes);
+        });
+    }
     function saveRecipe(req, res) {
         console.log(req.body.uri);
         var recipe = findRecipeByUrl(req.body.uri);
@@ -29,6 +36,7 @@ module.exports = function (app) {
         model
             .updateRecipe(req.params.recipeId, req.body)
             .then(function (status) {
+                console.log(status);
                 res.json(status);
             });
     }

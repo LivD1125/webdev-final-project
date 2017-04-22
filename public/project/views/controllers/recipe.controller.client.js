@@ -12,20 +12,32 @@
         vm.likePage = likePage;
         vm.logText = "Login";
         vm.logAction = logout;
-        if ($rootScope.currentUser) {
-            vm.userId = $rootScope.currentUser._id;
-            vm.logText = "Logout";
-            vm.logAction = logout;
-        }
+        vm.userId = $rootScope.currentUser._id;
+        vm.logText = "Logout";
+        vm.logAction = logout;
 
         function init() {
             var promise = RecipeService.findRecipeById(vm.recipeId);
             promise.success(function(recipe){
                 vm.recipe = recipe;
             });
+            isLiked();
         }
         init();
 
+        function isLiked() {
+            RecipeService.isLiked(vm.recipeId, vm.userId).then(function(res) {
+                vm.likeCount = res.data.count;
+                if (res.data.isLiked) {
+                    vm.isLiked = "Liked";
+                    vm.isLikedAction = "";
+                } else {
+                    vm.isLiked = "Like";
+                    vm.isLikedAction = "model.likePage()";
+                }
+            });
+
+        }
         function logout() {
             UserService
                 .logout()

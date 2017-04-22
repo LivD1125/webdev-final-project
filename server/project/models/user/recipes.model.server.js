@@ -9,10 +9,36 @@ module.exports = function (model) {
         saveRecipe: saveRecipe,
         findById: findById,
         findByUrl: findByUrl,
-        updateRecipe: updateRecipe
+        updateRecipe: updateRecipe,
+        findLikes: findLikes
     };
     return api;
 
+    function findLikes(userId, recipeId) {
+        var deferred = q.defer();
+        var likes = {};
+        recipeModel
+            .findById(recipeId, function (err, recipe) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    if (recipe.users.indexOf(userId) > -1) {
+                        likes = {
+                            isLiked: true,
+                            count: recipe.users.length
+                        };
+                        console.log(likes);
+                    } else {
+                        likes = {
+                            isLiked: false,
+                            count: recipe.users.length
+                        }
+                    }
+                    deferred.resolve(likes);
+                }
+            });
+        return deferred.promise;
+    }
     function saveRecipe(recipe) {
         var deferred = q.defer();
         recipeModel.create(recipe, function(err, pg) {
@@ -32,9 +58,12 @@ module.exports = function (model) {
         recipeModel
             .update(
                 {_id: recipeId},
-                {$push: {"users": userId}},
+                {$push: {"users": userId.userId}},
                 function (err, status) {
+                    console.log(err);
+                    console.log(status);
                     deferred.resolve(status);
+
                 });
         return deferred.promise;
     }

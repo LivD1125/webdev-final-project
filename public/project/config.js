@@ -51,7 +51,8 @@
         when('/recipe/:recipeId', {
             templateUrl: "views/recipe.view.client.html",
             controller: "RecipeController",
-            controllerAs: "model"
+            controllerAs: "model",
+            resolve: { loggedin: checkLoggedin }
         }).
         when('/weather', {
             templateUrl: "views/weather.view.client.html",
