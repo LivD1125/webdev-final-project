@@ -27,7 +27,6 @@
             foodByWeather($routeParams.query);
             forecast($routeParams.query);
         }
-
         function login() {
             $location.url('/login');
         }
