@@ -23,6 +23,9 @@
             promise.success(function(user){
                 vm.user = user;
                 vm.userId = user._id;
+                if ($rootScope.currentUser._id !== vm.userId) {
+                    vm.canDelete = true;
+                }
             });
         }
         init();
@@ -57,6 +60,7 @@
                 .success(function(user) {
                     if (user) {
                         vm.message = "User Successfully Deleted";
+                        $location.url('/admin');
                     } else {
                         vm.error = "Unable to Delete User";
                     }

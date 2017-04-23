@@ -24,6 +24,7 @@
                         <textarea ng-model="model.user.aboutMe" id="about-me" class="form-control" placeholder="Tell everyone about yourself..." rows="3"></textarea>
                     </div>
                 </form>
+            <button ng-click="model.deleteUser()" ng-if="model.canDelete" class="btn btn-danger read-more btn-lg pull-left">Delete User</button>
             <button ng-click="model.updateUser(model.user)" class="btn btn-default read-more btn-lg pull-right">Save</button>
             </div>
         </div>
