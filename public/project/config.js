@@ -25,6 +25,12 @@
                 controllerAs: "model",
                 resolve: { loggedin: checkLoggedin }
             })
+            .when("/settings/:userId", {
+                templateUrl: "views/user/settings.view.client.html",
+                controller: "AdminSettingsController",
+                controllerAs: "model",
+                resolve: { loggedin: checkAdmin }
+            })
             .when("/welcome", {
                 templateUrl: "views/home.view.client.html",
                 controller: "HomeController",

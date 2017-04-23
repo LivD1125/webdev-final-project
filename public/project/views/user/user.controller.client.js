@@ -119,7 +119,6 @@
         vm.register = register;
         vm.logText = "Login";
         vm.logAction = login;
-        console.log($rootScope.currentUser);
         function login() {
             $location.url('/login');
         }
@@ -137,7 +136,6 @@
             }
 
             if ($rootScope.currentUser === undefined) {
-                console.log('register');
                 UserService
                     .register(user)
                     .then(
@@ -147,7 +145,6 @@
                             $location.url("/user/");
                         });
             } else {
-                console.log('create');
                 UserService
                     .createUser(user)
                     .then(

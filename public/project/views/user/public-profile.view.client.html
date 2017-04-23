@@ -7,6 +7,12 @@
                 <div class="col-sm-8">
                     <h1>{{model.user.username}}</h1>
                 </div>
+                <div ng-if="model.isAdmin" class="col-sm-4 settings pull-right">
+                    <a href="#/settings/{{model.user._id}}">
+                        <span class=" pull-right glyphicon glyphicon-cog edit-site">
+                      </span>
+                    </a>
+                </div>
                 <div class="col-sm-4 pull-right">
                     <a class="btn btn-default" ng-if="model.notFollowing" ng-click="model.followUser()">
                         Follow
