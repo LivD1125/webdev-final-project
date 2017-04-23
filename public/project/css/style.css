@@ -2,7 +2,14 @@
 body {
     padding-bottom: 10rem;
 }
-
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+}
+.weather-report {
+    margin-top: 60px;
+}
 .like-button {
     margin-top: 20px;
 }

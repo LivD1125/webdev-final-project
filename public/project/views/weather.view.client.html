@@ -1,0 +1,14 @@
+<div ng-include="'views/nav/navbar.view.client.html'"></div>
+<div class="container">
+    <div row>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input ng-model="model.query" type="text" class="form-control" placeholder="Enter Your Zip Code...">
+                <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="model.foodByWeather(model.query)" type="button">Go!</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'views/nav/footer.view.client.html'"></div>

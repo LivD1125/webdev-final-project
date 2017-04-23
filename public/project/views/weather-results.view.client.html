@@ -1,0 +1,54 @@
+<div ng-include="'views/nav/navbar.view.client.html'"></div>
+<div class="container">
+    <script>
+        function initMap() {
+            var latLong = document.getElementById('empty-div');
+            var lat = parseFloat(latLong.getAttribute('data-lat'));
+            var lon = parseFloat(latLong.getAttribute('data-lon'));
+            var uluru = {lat: lat, lng: lon};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPOgUWxI2x2Zoq50zcRI4aKqTiAn7LR8w&callback=initMap">
+    </script>
+    <div id="empty-div" data-lon="{{model.weatherData.coord.lon}}" data-lat="{{model.weatherData.coord.lat}}"></div>
+    <div row>
+        <div class="col-md-6">
+            <h1>{{model.weatherData.name}}</h1>
+            <div id="map"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="row weather-report">
+                <h4>Current Temp (F): {{model.weatherData.main.temp}} degrees Fahareinheit</h4>
+                <h4>Today(F): {{model.weatherForecast.list[0].temp.day}} degrees Fahareinheit</h4>
+                <h4>High Today (F): {{model.weatherForecast.list[0].temp.max}} degrees Fahareinheit</h4>
+                <h4>Low Today (F): {{model.weatherForecast.list[0].temp.min}} degrees Fahareinheit</h4>
+                <h4>Humidity: {{model.weatherData.main.humidity}}</h4>
+                <h4>Notes: {{model.weatherForecast.list[0].weather[0].main}}, {{model.weatherForecast.list[0].weather[0].description}}</h4>
+            </div>
+            <hr>
+            <div class="row food-options">
+                <h4>For Today's Weather We Recommend these Recipes: </h4>
+            </div>
+        </div>
+
+
+        <!--<div class="col-md-6">-->
+            <!--<div class="input-group">-->
+                <!--<input ng-model="model.query" type="text" class="form-control" placeholder="Enter Your Zip Code...">-->
+                <!--<span class="input-group-btn">-->
+                        <!--<button class="btn btn-default" ng-click="model.foodByWeather(model.query)" type="button">Go!</button>-->
+                    <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+<div ng-include="'views/nav/footer.view.client.html'"></div>

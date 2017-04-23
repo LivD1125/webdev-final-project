@@ -1,12 +1,12 @@
 (function () {
     angular
         .module("FinalWebAppMaker")
-        .controller("HomeController", HomeController);
+        .controller("WeatherResultsController", weatherResultsController);
 
-    function HomeController($location, $rootScope, UserService, ExternalService) {
+    function weatherResultsController($routeParams, $location, $rootScope, UserService, ExternalService) {
         var vm = this;
         //event handlers
-        vm.searchRecipes = getResults;
+        vm.foodByWeather = foodByWeather;
         function init() {
             if ($rootScope.loggedIn) {
                 vm.logText = "Logout";
@@ -17,13 +17,25 @@
                 vm.logText = "Login";
                 vm.logAction = login;
             }
+            vm.query = $routeParams.query;
+            foodByWeather($routeParams.query);
+            forecast($routeParams.query);
         }
+
         function login() {
             $location.url('/login');
         }
-
-        function getResults(query) {
-                $location.url("results/" + query);
+        function forecast(query) {
+            ExternalService.getForecast(query).then(function(res) {
+                vm.weatherForecast = res.data;
+                console.log(vm.weatherForecast);
+            });
+        }
+        function foodByWeather(query) {
+            ExternalService.findWeather(query).then(function(res) {
+                vm.weatherData = res.data;
+                getFoodOptions(we)
+            });
         }
 
         function logout() {
@@ -37,6 +49,7 @@
                         vm.message = "Logout Successful";
                     });
         }
+
         init();
     }
 })();

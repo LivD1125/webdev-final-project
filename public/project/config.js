@@ -58,6 +58,11 @@
             templateUrl: "views/weather.view.client.html",
             controller: "WeatherController",
             controllerAs: "model"
+        }).
+        when('/weather/:query', {
+            templateUrl: "views/weather-results.view.client.html",
+            controller: "WeatherResultsController",
+            controllerAs: "model"
         });
 
     }
