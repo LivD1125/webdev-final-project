@@ -2,28 +2,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <h2>{{model.recipe.label}}</h2>
+            <h2 class="header">{{model.recipe.label}}</h2>
             <img class="img-responsive" src="{{model.recipe.image}}" />
-            <a href="{{model.recipe.url}}">Click Here For Full Recipe</a>
+            <a class="sub-header" href="{{model.recipe.url}}">Click Here For Full Recipe</a>
         </div>
         <div class="col-md-4">
-            <h3>Ingredients</h3>
+            <h3 class="sub-header ingredients">Ingredients</h3>
             <ul ng-repeat="ingredient in model.recipe.ingredientLines">
-                <li>{{ingredient}}</li>
+                <li class="health-labels">{{ingredient}}</li>
             </ul>
         </div>
         <div class="col-md-4">
             <div class="row">
                 <div class="col-xs-6">
-                    <h3>Like Count: {{model.likeCount}}</h3>
+                    <h3 class="ingredients sub-header">Like Count: {{model.likeCount}}</h3>
                 </div>
-                <div class="col-xs-2 like-button">
-            <button type="button" ng-click="model.isLikedAction()" class="btn btn-info pull-right">{{model.isLiked}}</button>
+                <div class="ingredients col-xs-2 like-button">
+                    <button type="button" ng-if="model.notLiked" ng-click="model.isLikedAction()" class="btn-like btn btn-primary pull-right">{{model.isLiked}}</button>
+                    <button type="button" ng-if="model.checkLiked" ng-click="model.isLikedAction()" class="btn-like btn btn-success pull-right">{{model.isLiked}}</button>
                 </div>
 
             </div>
             <div ng-repeat="user in model.users">
-                <a href="#/user/{{user._id}}"><h4>{{user.username}}</h4></a>
+                <a href="#/user/{{user._id}}"><h4 class="foll">{{user.username}}</h4></a>
             </div>
         </div>
     </div>

@@ -34,9 +34,11 @@
             RecipeService.isLiked(vm.recipeId, vm.userId).then(function(res) {
                 vm.likeCount = res.data.count;
                 if (res.data.isLiked) {
+                    vm.checkLiked = true;
                     vm.isLiked = "Liked";
                     vm.isLikedAction = "";
                 } else {
+                    vm.notLiked= true;
                     vm.isLiked = "Like";
                     vm.isLikedAction = likePage;
                 }

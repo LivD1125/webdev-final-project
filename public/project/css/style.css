@@ -27,6 +27,12 @@ body {
     color: #3c3c3c;
     font-weight: bold;
 }
+.like-down {
+    margin-top: 30px;
+}
+.ingredients {
+    margin-top: 60px;
+}
 .sub-header {
     color: #286090;
     font-weight: bold;
@@ -64,6 +70,9 @@ body {
 }
 .like-button {
     margin-top: 20px;
+}
+.btn-like {
+    width: 80px;
 }
 .pointer {
     cursor: pointer;
