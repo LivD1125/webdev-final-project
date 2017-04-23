@@ -5,7 +5,7 @@
         <div class="col-sm-8 text-left col-md-push-2">
             <div class="row">
                 <div class="col-sm-8">
-                    <h1>{{model.user.username}}</h1>
+                    <h1 class="header">{{model.user.username}}</h1>
                 </div>
                 <div class="col-sm-4 settings pull-right">
                     <a href="#/settings">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <hr>
-            <h3>Liked Recipes</h3>
+            <h3 class="sub-header">Liked Recipes</h3>
             <div class="col-sm-10">
                 <div class="row" ng-repeat="recipe in model.recipesShortened" ng-switch="" on="$index % 3">
                     <div class="col-xs-4" ng-switch-when="0">
@@ -59,7 +59,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">All Saved Recipes</h4>
+                                <h4 class="modal-title sub-header">All Saved Recipes</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="row" ng-repeat="recipe in model.recipes" ng-switch="" on="$index % 3">
@@ -69,7 +69,7 @@
                                                 <img class="img-responsive thumbnail" src={{model.recipes[$index].image}} />
                                             </div>
                                             <div class="col-sm-6">
-                                                <a href="#/recipe/{{model.recipes[$index]._id}}"><h4>{{model.recipes[$index].label}}</h4></a>
+                                                <a href="#/recipe/{{model.recipes[$index]._id}}"><h4 class="foll">{{model.recipes[$index].label}}</h4></a>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                                 <img class="img-responsive thumbnail" src={{model.recipes[$index+1].image}} />
                                             </div>
                                             <div class="col-sm-6">
-                                                <a href="#/recipe/{{model.recipes[$index + 1]._id}}"><h4>{{model.recipes[$index + 1].label}}</h4></a>
+                                                <a class="foll" href="#/recipe/{{model.recipes[$index + 1]._id}}"><h4 class="foll">{{model.recipes[$index + 1].label}}</h4></a>
                                             </div>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                                 <img class="img-responsive thumbnail" src={{model.recipes[$index+2].image}} />
                                             </div>
                                             <div class="col-sm-6">
-                                                <a href="#/recipe/{{model.recipes[$index + 2]._id}}"><h4>{{model.recipes[$index + 2].label}}</h4></a>
+                                                <a class="foll" href="#/recipe/{{model.recipes[$index + 2]._id}}"><h4 class="foll">{{model.recipes[$index + 2].label}}</h4></a>
                                             </div>
                                         </div>
                                     </div>
@@ -105,17 +105,17 @@
             </div>
         </div>
         <div class="col-sm-2 sidenav col-md-pull-8">
-            <h2>About Me</h2>
-            <p>{{model.user.aboutMe}}</p>
+            <h3 class="sub-header">About Me</h3>
+            <p class="bio">{{model.user.aboutMe}}</p>
         </div>
         <div class="col-sm-2 sidenav">
-            <h3>Followers</h3>
+            <h3 class="sub-header">Followers</h3>
             <div ng-repeat="follower in model.followers">
-                <a href="#/user/{{follower._id}}">{{follower.username}}</a>
+                <a class="bio foll" href="#/user/{{follower._id}}">{{follower.username}}</a>
             </div>
-            <h3>Following</h3>
+            <h3 class="sub-header">Following</h3>
             <div ng-repeat="following in model.following">
-                <a href="#/user/{{following._id}}">{{following.username}}</a>
+                <a class="bio foll" href="#/user/{{following._id}}">{{following.username}}</a>
             </div>
         </div>
     </div>

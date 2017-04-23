@@ -1,7 +1,7 @@
 <div ng-include="'views/nav/navbar.view.client.html'"></div>
 
 <div class="container-fluid">
-    <h1>Login</h1>
+    <h1 class="header">Login</h1>
 
     <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
@@ -31,7 +31,9 @@
         </a>
         <a href="/auth/project/facebook"  class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-fw"></i> Facebook</a>
     </div>
-    <p>Not a User?</p><a href="#/register" class="btn btn-link">Register Here</a>
+    <div class="row">
+        <div class="col-xs-6 register-here"><p>Not a User?</p><a href="#/register" class="register-btn btn btn-info">Register Here</a></div>
+    </div>
 
 </div>
 <div ng-include="'views/nav/footer.view.client.html'"></div>
