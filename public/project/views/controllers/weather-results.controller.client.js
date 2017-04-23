@@ -10,6 +10,7 @@
         vm.foodByWeather = foodByWeather;
         vm.seeDetails = seeDetails;
         function init() {
+            vm.loggedIn = !$rootScope.loggedIn;
             if ($rootScope.loggedIn) {
                 if ($rootScope.currentUser.isAdmin) {
                     vm.isAdmin = true;
