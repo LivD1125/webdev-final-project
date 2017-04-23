@@ -48,7 +48,6 @@
                     vm.recipesShortened = res.data;
                     vm.addMore = true;
                 }
-                console.log(vm.recipes);
             });
         }
 
@@ -61,7 +60,6 @@
 
     function getFollowers() {
         UserService.getFollowers(vm.user.follower, vm.user.following).then(function(res){
-            console.log(res.data);
             vm.followers = res.data.followers;
             vm.following = res.data.following;
         });

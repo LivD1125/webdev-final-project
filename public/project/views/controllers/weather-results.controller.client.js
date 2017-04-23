@@ -3,10 +3,12 @@
         .module("FinalWebAppMaker")
         .controller("WeatherResultsController", weatherResultsController);
 
-    function weatherResultsController($routeParams, $location, $rootScope, UserService, ExternalService) {
+    function weatherResultsController($routeParams, $location, $rootScope,
+                                      UserService, ExternalService, RecipeService) {
         var vm = this;
         //event handlers
         vm.foodByWeather = foodByWeather;
+        vm.seeDetails = seeDetails;
         function init() {
             if ($rootScope.loggedIn) {
                 vm.logText = "Logout";
@@ -28,16 +30,59 @@
         function forecast(query) {
             ExternalService.getForecast(query).then(function(res) {
                 vm.weatherForecast = res.data;
-                console.log(vm.weatherForecast);
             });
         }
         function foodByWeather(query) {
             ExternalService.findWeather(query).then(function(res) {
                 vm.weatherData = res.data;
-                getFoodOptions(we)
+                getFoodOptions(vm.weatherData, vm.weatherForecast);
             });
         }
 
+        function seeDetails(recipe) {
+            RecipeService.saveRecipe(recipe).then(function(res) {
+                $location.url('/recipe/' + res.data._id);
+            });
+
+        }
+
+        function getFoodOptions() {
+            if (vm.weatherData.main.temp > 90) {
+                ExternalService.searchResults('fruit').then(function(resp) {
+                    var random = Math.floor(Math.random() *  resp.data.hits.length - 5);
+                    vm.results = resp.data.hits.slice(random, random + 4);
+                });
+            } else if  (vm.weatherData.main.temp > 75) {
+                ExternalService.searchResults('fruit').then(function(resp) {
+                    var random = Math.floor(Math.random() *  resp.data.hits.length - 5);
+                    vm.results = resp.data.hits.slice(random, random + 4);
+                });
+
+            } else if (vm.weatherData.main.temp > 60) {
+                ExternalService.searchResults('fruit').then(function(resp) {
+                    var random = Math.floor(Math.random() *  resp.data.hits.length - 5);
+                    vm.results = resp.data.hits.slice(random, random + 4);
+                });
+
+            } else if (vm.weatherData.main.temp > 45) {
+                ExternalService.searchResults('fruit').then(function(resp) {
+                    var random = Math.floor(Math.random() *  resp.data.hits.length - 5);
+                    vm.results = resp.data.hits.slice(random, random + 4);
+                });
+
+            } else if (vm.weatherData.main.temp > 30) {
+                ExternalService.searchResults('fruit').then(function(resp) {
+                    var random = Math.floor(Math.random() *  resp.data.hits.length - 5);
+                    vm.results = resp.data.hits.slice(random, random + 4);
+                });
+
+            } else {
+                ExternalService.searchResults('fruit').then(function(resp) {
+                    var random = Math.floor(Math.random() *  resp.data.hits.length - 5);
+                    vm.results = resp.data.hits.slice(random, random + 4);
+                });
+            }
+        }
         function logout() {
             UserService
                 .logout()

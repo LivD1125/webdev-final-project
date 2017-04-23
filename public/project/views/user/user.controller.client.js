@@ -75,7 +75,6 @@
                     vm.recipesShortened = res.data;
                     vm.addMore = true;
                 }
-                console.log(vm.recipes);
             });
         }
 
