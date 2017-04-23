@@ -14,11 +14,66 @@ module.exports = function (model) {
         deleteUser: deleteUser,
         updateUser: updateUser,
         findUserByFacebookId: findUserByFacebookId,
-        likeRecipe: likeRecipe
+        likeRecipe: likeRecipe,
+        getUsers: getUsers,
+        follow: follow,
+        addFollower: addFollower,
+        getFollowers: getFollowers
 
     };
     return api;
 
+    function getFollowers(followerIds) {
+        var deferred = q.defer();
+        userModel.find({ "_id" : { $in : followerIds } }, function(err, users) {
+            if(err) {
+                console.log(err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function follow(userId, profileId) {
+        console.log(profileId);
+        var deferred = q.defer();
+        userModel
+            .update(
+                {_id: userId},
+                {$push: {"following": profileId}},
+                function (err, status) {
+                    console.log(err);
+                    deferred.resolve(status);
+                });
+        return deferred.promise;
+    }
+
+    function addFollower(profileId, userId) {
+        var deferred = q.defer();
+        userModel
+            .update(
+                {_id: profileId},
+                {$push: {"follower": userId}},
+                function (err, status) {
+                    console.log(err);
+                    deferred.resolve(status);
+                });
+        return deferred.promise;
+    }
+    function getUsers(userIds) {
+        var deferred = q.defer();
+        userModel.find({ "_id" : { $in : userIds } }, function(err, users) {
+            if(err) {
+                console.log(err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
+            }
+        });
+        return deferred.promise;
+    }
 
     function likeRecipe(userId, recipeId) {
         var deferred = q.defer();
@@ -28,7 +83,6 @@ module.exports = function (model) {
                 {$push: {"recipes": recipeId.recipeId}},
                 function (err, status) {
                     console.log(err);
-                    console.log(status);
                     deferred.resolve(status);
 
                 });
@@ -84,6 +138,7 @@ module.exports = function (model) {
                         firstName: user.firstName,
                         lastName: user.lastName,
                         email: user.email,
+                        aboutMe: user.aboutMe,
                         dateCreated: Date.now()}},
                 function (err, status) {
                     deferred.resolve(status);

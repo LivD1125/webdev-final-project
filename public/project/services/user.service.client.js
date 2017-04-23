@@ -15,10 +15,25 @@
             "logout": logout,
             "loggedin": loggedin,
             "register": register,
-            "likePage": likePage
+            "likePage": likePage,
+            "getUsers": getUsers,
+            "follow": follow,
+            "getFollowers":getFollowers
         };
         return api;
 
+        function getFollowers(followerIds) {
+            return $http.post('/api/project/user/followers', followerIds);
+        }
+        function follow(currentUser, profileUser) {
+            var id = {
+                profileUser: profileUser
+            };
+            return $http.put("/api/project/user/follow/" + currentUser, id);
+        }
+        function getUsers(userIds) {
+            return $http.post('/api/project/recipes/users', userIds);
+        }
         function login(user) {
             return $http.post("/api/project/login", user);
         }

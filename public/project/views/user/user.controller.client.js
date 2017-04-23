@@ -54,12 +54,20 @@
         function init() {
             vm.user = $rootScope.currentUser;
             getRecipes();
+            getFollowers();
             console.log(vm.user);
             viewMore();
         }
         init();
         function viewMore() {
 
+        }
+
+        function getFollowers() {
+            UserService.getFollowers(vm.user.follower).then(function(res){
+                vm.followers = res.data;
+                console.log(res.data);
+            });
         }
         function getRecipes() {
             RecipeService.getRecipes(vm.user.recipes).then(function (res) {

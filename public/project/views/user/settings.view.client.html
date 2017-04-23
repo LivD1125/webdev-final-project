@@ -12,14 +12,19 @@
                         <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
                     </div>
                     <div class="form-group">
-                        <label for="first-name">First Name</label>
+                        <label for="first-name">Name</label>
                         <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
                     </div>
                     <div class="form-group">
                         <label for="last-name">Last Name</label>
                         <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
                     </div>
+                    <div class="form-group">
+                        <label for="about-me">About Me</label>
+                        <textarea ng-model="model.user.aboutMe" id="about-me" class="form-control" placeholder="Tell everyone about yourself..." rows="3"></textarea>
+                    </div>
                 </form>
+            <button ng-click="model.updateUser(model.user)" class="btn btn-default read-more btn-lg pull-right">Save</button>
             </div>
         </div>
     </div>

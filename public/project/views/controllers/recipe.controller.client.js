@@ -20,7 +20,9 @@
             var promise = RecipeService.findRecipeById(vm.recipeId);
             promise.success(function(recipe){
                 vm.recipe = recipe;
+                getUsers();
             });
+
             isLiked();
         }
         init();
@@ -57,8 +59,19 @@
                 vm.likedClass = "btn-success";
             });
             UserService.likePage(vm.recipeId, vm.userId).then(function(res) {
-                console.log("go go go");
-            })
+                //fire and forget
+            });
+        }
+
+        function getUsers() {
+            UserService.getUsers(vm.recipe.users).then(function (res) {
+                vm.users = res.data;
+
+                if (vm.users.length > 9){
+                    vm.users = res.data.splice(0, 9);
+                    vm.isViewMore = true;
+                }
+            });
         }
     }
 })();

@@ -37,12 +37,12 @@
                 controllerAs: "model",
                 resolve: { loggedin: checkLoggedin }
             })
-        .when("/parksandrec", {
-                templateUrl: "views/results.view.client.html",
-                controller: "ParksController",
-                controllerAs: "model",
-                resolve: { loggedin: checkLoggedin }
-            }).
+        .when("/user/:userId", {
+            templateUrl: "views/user/public-profile.view.client.html",
+            controller: "PublicProfileController",
+            controllerAs: "model",
+            resolve: { loggedin: checkLoggedin }
+        }).
         when("/results/:query", {
             templateUrl: "views/results.view.client.html",
             controller: "ResultsController",

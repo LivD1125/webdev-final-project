@@ -37,8 +37,8 @@
         }
         function seeDetails(recipe) {
             RecipeService.saveRecipe(recipe).then(function(res) {
-                $rootScope.currentRecipe = recipe;
-                $location.url('/recipe/' + res.data);
+                console.log(res);
+                $location.url('/recipe/' + res.data._id);
             });
 
         }
@@ -53,12 +53,6 @@
                         $location.url("/welcome");
                         vm.message = "Logout Successful";
                     });
-        }
-        function likePage() {
-            PageService.likePage(vm.userId, vm.showOverview).then(function(res) {
-                vm.liked = "Liked";
-                vm.likedClass = "btn-success";
-            });
         }
         function login() {
             $location.url('/login');

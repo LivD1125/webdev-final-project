@@ -22,16 +22,23 @@ module.exports = function (app) {
         });
     }
     function saveRecipe(req, res) {
-        var recipe = findRecipeByUrl(req.body.uri);
-        if (recipe === undefined) {
-            model
-                .saveRecipe(req.body)
-                .then(function (recipe) {
-                    res.json(recipe._id);
-                });
-        } else {
-            res.json(recipe._id);
-        }
+        model
+            .findByUrl(req.body.uri)
+            .then(function (response) {
+                if (!response) {
+                    model
+                        .saveRecipe(req.body)
+                        .then(function (recipe) {
+                            res.json(recipe);
+                        });
+                } else {
+                    model
+                        .findByUrl(req.body.uri).
+                            then(function (resp) {
+                                res.json(resp);
+                    });
+                }
+            });
     }
 
     function updateRecipe(req, res) {
@@ -51,10 +58,6 @@ module.exports = function (app) {
     }
 
     function findRecipeByUrl(url) {
-        model
-            .findByUrl(url)
-            .then(function (res) {
-                return res;
-            });
+
     }
 };

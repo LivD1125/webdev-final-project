@@ -1,7 +1,7 @@
 (function () {
     angular
         .module("FinalWebAppMaker")
-        .controller("SettingsController", SettingsController)
+        .controller("SettingsController", SettingsController);
 
     function SettingsController($routeParams, $location, $rootScope, UserService) {
         var vm = this;
@@ -10,7 +10,7 @@
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.logout = logout;
-
+        vm.user = $rootScope.currentUser;
         vm.userId = $rootScope.currentUser._id;
 
         function init() {
@@ -42,6 +42,7 @@
                 .success(function(user) {
                     if(user) {
                         vm.message = "User Successfully Updated";
+                        $location.url('/user');
                     } else {
                         vm.error = "error updating user";
                     }

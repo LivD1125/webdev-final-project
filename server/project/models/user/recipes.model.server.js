@@ -40,7 +40,6 @@ module.exports = function (model) {
                             isLiked: true,
                             count: recipe.users.length
                         };
-                        console.log(likes);
                     } else {
                         likes = {
                             isLiked: false,
@@ -65,8 +64,6 @@ module.exports = function (model) {
     }
 
     function updateRecipe(recipeId, userId) {
-        console.log(recipeId);
-        console.log(userId);
         var deferred = q.defer();
         recipeModel
             .update(
@@ -74,7 +71,6 @@ module.exports = function (model) {
                 {$push: {"users": userId.userId}},
                 function (err, status) {
                     console.log(err);
-                    console.log(status);
                     deferred.resolve(status);
 
                 });

@@ -26,13 +26,37 @@ module.exports = function (app) {
     app.delete("/api/project/user/:userId", deleteUser);
     app.get ('/auth/project/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.put('/api/project/user/like/:userId', likeRecipe);
-
+    app.post('/api/project/recipes/users', getUsers);
+    app.put('/api/project/user/follow/:currentUser', followUser);
+    app.post('/api/project/user/followers', getFollowers);
     app.get('/auth/project/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/project/#/user',
             failureRedirect: '/project/#/login'
         }));
 
+    function followUser(req, res) {
+        model.follow(req.params.currentUser, req.body.profileUser).then(function(resp) {
+            model.addFollower(req.body.profileUser, req.params.currentUser).then(function(respo) {
+                const fol = {
+                    follow: resp,
+                    follower: respo
+                };
+                res.json(fol);
+            });
+        });
+    }
+
+    function getFollowers(req, res) {
+        model.getFollowers(req.body).then(function(users) {
+            res.json(users);
+        });
+    }
+    function getUsers(req, res) {
+        model.getUsers(req.body).then(function(users) {
+            res.json(users);
+        });
+    }
 
     function likeRecipe(req, res) {
         model

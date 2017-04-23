@@ -9,6 +9,12 @@ body {
 .pointer {
     cursor: pointer;
 }
+.settings {
+    margin-top: 20px;
+}
+.edit-site {
+    font-size: 3rem;
+}
 .btn-login {
     background: #e5e5e5;
     border-radius: .2rem;
