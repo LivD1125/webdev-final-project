@@ -23,6 +23,10 @@ body {
 .description-home {
     color: #286090;
 }
+.health-labels {
+    color: #3c3c3c;
+    font-weight: bold;
+}
 .sub-header {
     color: #286090;
     font-weight: bold;
