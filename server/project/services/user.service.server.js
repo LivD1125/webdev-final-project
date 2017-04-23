@@ -48,10 +48,17 @@ module.exports = function (app) {
     }
 
     function getFollowers(req, res) {
-        model.getFollowers(req.body).then(function(users) {
-            res.json(users);
+        model.getFollowers(req.body.followers).then(function(users) {
+            model.getFollowing(req.body.following).then(function(following) {
+                const fol = {
+                    followers: users,
+                    following: following
+                };
+                res.json(fol);
+            });
         });
     }
+
     function getUsers(req, res) {
         model.getUsers(req.body).then(function(users) {
             res.json(users);

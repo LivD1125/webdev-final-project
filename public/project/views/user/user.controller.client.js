@@ -33,7 +33,6 @@
                         vm.error = "Username or Password Incorrect";
                     }
                 );
-
         }
         init();
     }
@@ -55,31 +54,31 @@
             vm.user = $rootScope.currentUser;
             getRecipes();
             getFollowers();
-            console.log(vm.user);
-            viewMore();
         }
         init();
-        function viewMore() {
-
-        }
 
         function getFollowers() {
-            UserService.getFollowers(vm.user.follower).then(function(res){
-                vm.followers = res.data;
-                console.log(res.data);
+            UserService.getFollowers(vm.user.follower, vm.user.following).then(function(res){
+                vm.followers = res.data.followers;
+                vm.following = res.data.following;
             });
         }
+
         function getRecipes() {
             RecipeService.getRecipes(vm.user.recipes).then(function (res) {
                 vm.recipes = res.data;
-                console.log(vm.recipes);
-
-                if (vm.recipes.length > 9){
-                    vm.recipes = res.data.splice(0, 9);
+                const rec = res.data.slice();
+                if (rec.length > 9){
+                    vm.recipesShortened = rec.splice(0, 9);
                     vm.isViewMore = true;
+                } else {
+                    vm.recipesShortened = res.data;
+                    vm.addMore = true;
                 }
+                console.log(vm.recipes);
             });
         }
+
         function logout() {
             UserService
                 .logout()
@@ -91,18 +90,17 @@
                         vm.message = "Logout Successful";
                     });
         }
-
-            function updateUser(newUser) {
-                UserService
-                    .updateUser(vm.userId, newUser)
-                    .success(function(user) {
-                        if(user) {
-                            vm.message = "User Successfully Updated";
-                        } else {
-                            vm.error = "error updating user";
-                        }
-                });
-            }
+        function updateUser(newUser) {
+            UserService
+                .updateUser(vm.userId, newUser)
+                .success(function(user) {
+                    if(user) {
+                        vm.message = "User Successfully Updated";
+                    } else {
+                        vm.error = "error updating user";
+                    }
+            });
+        }
         function deleteUser() {
             UserService
                 .deleteUser(vm.userId)
@@ -139,8 +137,7 @@
                 .register(user)
                 .then(
                     function (response) {
-                        var user = response.data;
-                        $rootScope.currentUser = user;
+                        $rootScope.currentUser = response.data;
                         $rootScope.loggedin = true;
                         $location.url("/user/");
                     });

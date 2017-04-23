@@ -22,8 +22,12 @@
         };
         return api;
 
-        function getFollowers(followerIds) {
-            return $http.post('/api/project/user/followers', followerIds);
+        function getFollowers(followerIds, followingIds){
+            const fol = {
+                followers: followerIds,
+                following: followingIds
+            };
+            return $http.post('/api/project/user/followers', fol);
         }
         function follow(currentUser, profileUser) {
             var id = {

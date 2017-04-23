@@ -21,6 +21,7 @@
         if (vm.userId === $routeParams.userId) {
             $location.url('/user');
         }
+
         var promise = UserService.findUserById($routeParams.userId);
         promise.success(function(user){
             vm.user = user;
@@ -33,20 +34,24 @@
             getRecipes();
             getFollowers();
         });
-
     }
-
     init();
-    function getRecipes() {
-        RecipeService.getRecipes(vm.user.recipes).then(function (res) {
-            vm.recipes = res.data;
 
-            if (vm.recipes.length > 9){
-                vm.recipes = res.data.splice(0, 9);
-                vm.isViewMore = true;
-            }
-        });
-    }
+        function getRecipes() {
+            RecipeService.getRecipes(vm.user.recipes).then(function (res) {
+                vm.recipes = res.data;
+                const rec = res.data.slice();
+                if (rec.length > 9){
+                    vm.recipesShortened = rec.splice(0, 9);
+                    vm.isViewMore = true;
+                } else {
+                    vm.recipesShortened = res.data;
+                    vm.addMore = true;
+                }
+                console.log(vm.recipes);
+            });
+        }
+
     function followUser() {
         UserService.follow(vm.userId, vm.user._id).then(function(res) {
             vm.notFollowing = false;
@@ -55,11 +60,13 @@
     }
 
     function getFollowers() {
-        UserService.getFollowers(vm.user.follower).then(function(res){
-            vm.followers = res.data;
-
+        UserService.getFollowers(vm.user.follower, vm.user.following).then(function(res){
+            console.log(res.data);
+            vm.followers = res.data.followers;
+            vm.following = res.data.following;
         });
     }
+
     function logout() {
         UserService
             .logout()
