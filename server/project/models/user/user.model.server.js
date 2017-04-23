@@ -19,9 +19,8 @@ module.exports = function (model) {
     };
     return api;
 
+
     function likeRecipe(userId, recipeId) {
-        console.log(userId);
-        console.log(recipeId);
         var deferred = q.defer();
         userModel
             .update(

@@ -1,4 +1,4 @@
-<div ng-include="'views/navbar.view.client.html'"></div>
+<div ng-include="'views/nav/navbar.view.client.html'"></div>
 <div class="container">
     <div class="jumbotron">
         <div class="row">
@@ -10,13 +10,13 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group">
-                    <input ng-model="model.query" type="text" class="form-control" placeholder="Search for...">
+                    <input ng-model="model.query" type="text" class="form-control" placeholder="Search for Recipes...">
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="model.searchRecipes(model.query)" type="button">Go!</button>
                     </span>
-                </div><!-- /input-group -->
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div ng-include="'views/footer.view.client.html'"></div>
+<div ng-include="'views/nav/footer.view.client.html'"></div>

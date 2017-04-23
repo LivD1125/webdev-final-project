@@ -7,8 +7,14 @@ module.exports = function (app) {
     // app.get('/api/page/:pageId', findPageById);
     app.put('/api/project/recipe/:recipeId', updateRecipe);
     app.get('/api/project/recipe/like/:userId/:recipeId', isLiked);
+    app.post('/api/project/recipes', getRecipes);
     // app.delete('/api/page/:pageId', deletePage);
 
+    function getRecipes(req, res) {
+        model.getRecipes(req.body).then(function(recipes) {
+            res.json(recipes);
+        });
+    }
 
     function isLiked(req, res) {
         model.findLikes(req.params.userId, req.params.recipeId).then(function(likes) {

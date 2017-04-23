@@ -11,6 +11,8 @@
         vm.logout = logout;
         vm.likePage = likePage;
         vm.logAction = logout;
+        vm.profileLink = "#/user";
+        vm.profileText = "Profile";
         vm.userId = $rootScope.currentUser._id;
         vm.logText = "Logout";
 

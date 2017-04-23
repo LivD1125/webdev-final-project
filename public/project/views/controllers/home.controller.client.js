@@ -11,6 +11,8 @@
             if ($rootScope.loggedIn) {
                 vm.logText = "Logout";
                 vm.logAction = logout;
+                vm.profileLink = "#/user";
+                vm.profileText = "Profile";
             } else {
                 vm.logText = "Login";
                 vm.logAction = login;

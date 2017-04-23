@@ -8,9 +8,13 @@
             "likePage": likePage,
             "saveRecipe": saveRecipe,
             "findRecipeById": findRecipeById,
-            "isLiked": isLiked
+            "isLiked": isLiked,
+            "getRecipes": getRecipes
         };
         return api;
+        function getRecipes(recipeIds) {
+            return $http.post('/api/project/recipes', recipeIds);
+        }
 
         function isLiked(recipeId, userId) {
             return $http.get("/api/project/recipe/like/" + userId + "/" + recipeId);

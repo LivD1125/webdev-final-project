@@ -16,6 +16,8 @@
         function init() {
             vm.logText = "Logout";
             vm.logAction = logout;
+            vm.profileLink = "#/user";
+            vm.profileText = "Profile";
             var promise = UserService.findUserById(vm.userId);
             promise.success(function(user){
                 vm.user = user;

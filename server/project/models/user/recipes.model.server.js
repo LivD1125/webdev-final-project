@@ -10,10 +10,23 @@ module.exports = function (model) {
         findById: findById,
         findByUrl: findByUrl,
         updateRecipe: updateRecipe,
-        findLikes: findLikes
+        findLikes: findLikes,
+        getRecipes: getRecipes
     };
     return api;
 
+    function getRecipes(recipeIds) {
+        var deferred = q.defer();
+        recipeModel.find({ "_id" : { $in : recipeIds } }, function(err, recipes) {
+            if(err) {
+                console.log(err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(recipes);
+            }
+        });
+        return deferred.promise;
+    }
     function findLikes(userId, recipeId) {
         var deferred = q.defer();
         var likes = {};

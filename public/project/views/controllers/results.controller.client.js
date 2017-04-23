@@ -8,13 +8,17 @@
         var vm = this;
 
         // event handlers
-        vm.logout = logout;
         vm.seeDetails = seeDetails;
         if ($rootScope.currentUser) {
             vm.userId = $rootScope.currentUser._id;
+            vm.logText = "Login";
+            vm.logAction = login;
+            vm.profileLink = "#/user";
+            vm.profileText = "Profile";
+        } else {
+            vm.logText = "Logout";
+            vm.logAction = logout;
         }
-        vm.logText = "Logout";
-        vm.logAction = logout;
         function init() {
             getResults();
             var promise = UserService.findUserById(vm.userId);
@@ -46,16 +50,18 @@
                     function (response) {
                         $rootScope.currentUser = null;
                         $rootScope.loggedIn = false;
-                        $location.url("/login");
+                        $location.url("/welcome");
                         vm.message = "Logout Successful";
                     });
         }
-
         function likePage() {
             PageService.likePage(vm.userId, vm.showOverview).then(function(res) {
                 vm.liked = "Liked";
                 vm.likedClass = "btn-success";
-            })
+            });
+        }
+        function login() {
+            $location.url('/login');
         }
     }
 })();

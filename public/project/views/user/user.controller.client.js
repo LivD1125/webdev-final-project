@@ -37,7 +37,7 @@
         }
         init();
     }
-    function ProfileController($routeParams, $location, $rootScope, UserService) {
+    function ProfileController($routeParams, $location, $rootScope, UserService, RecipeService) {
         var vm = this;
 
         // event handlers
@@ -46,16 +46,32 @@
         vm.logout = logout;
         vm.logText = "Logout";
         vm.logAction = logout;
+        vm.profileLink = "#/user";
+        vm.profileText = "Profile";
+        vm.isViewMore = false;
         vm.userId = $rootScope.currentUser._id;
 
         function init() {
-            var promise = UserService.findUserById(vm.userId);
-            promise.success(function(user){
-                vm.user = user;
-            });
+            vm.user = $rootScope.currentUser;
+            getRecipes();
+            console.log(vm.user);
+            viewMore();
         }
         init();
+        function viewMore() {
 
+        }
+        function getRecipes() {
+            RecipeService.getRecipes(vm.user.recipes).then(function (res) {
+                vm.recipes = res.data;
+                console.log(vm.recipes);
+
+                if (vm.recipes.length > 9){
+                    vm.recipes = res.data.splice(0, 9);
+                    vm.isViewMore = true;
+                }
+            });
+        }
         function logout() {
             UserService
                 .logout()
@@ -96,7 +112,7 @@
 
         // event handlers
         vm.register = register;
-        vm.logText = "Logout";
+        vm.logText = "Login";
         vm.logAction = login;
 
         function login() {
