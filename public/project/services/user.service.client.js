@@ -18,10 +18,14 @@
             "likePage": likePage,
             "getUsers": getUsers,
             "follow": follow,
-            "getFollowers":getFollowers
+            "getFollowers":getFollowers,
+            "getAllUsers": getAllUsers
         };
         return api;
 
+        function getAllUsers() {
+            return $http.get('/api/project/users');
+        }
         function getFollowers(followerIds, followingIds){
             const fol = {
                 followers: followerIds,
@@ -70,6 +74,7 @@
         function createUser(user) {
             return $http.post("/api/project/user", user);
         }
+
         function deleteUser(userId) {
             return $http.delete("/api/project/user/" + userId);
         }

@@ -63,6 +63,12 @@
             templateUrl: "views/weather-results.view.client.html",
             controller: "WeatherResultsController",
             controllerAs: "model"
+        }).
+        when('/admin', {
+            templateUrl: "views/admin.view.client.html",
+            controller: "AdminController",
+            controllerAs: "model",
+            resolve: { loggedin: checkAdmin }
         });
 
     }
@@ -82,12 +88,38 @@
         });
         return deferred.promise;
     };
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/project/loggedin').success(function(user) {
+            $rootScope.errorMessage = null;
+            if (user !== '0') {
+                $rootScope.currentUser = user;
+                if (user.isAdmin) {
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url('/welcome');
+                }
+            } else {
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+        return deferred.promise;
+    };
     var checkLoggedOut = function($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
         $http.get('/api/project/loggedin').success(function(user) {
             if (user !== '0') {
                 deferred.resolve();
-                $location.url('/user');
+                if (user.isAdmin) {
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url('/user');
+                }
+
             } else {
                 deferred.resolve();
             }

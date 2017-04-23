@@ -15,6 +15,12 @@
                         <button class="btn btn-default" ng-click="model.searchRecipes(model.query)" type="button">Go!</button>
                     </span>
                 </div>
+                <div class="input-group">
+                    <input ng-model="model.weatherQuery" type="text" class="form-control" placeholder="Enter Your Zip Code...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="model.foodByWeather(model.weatherQuery)" type="button">Go!</button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

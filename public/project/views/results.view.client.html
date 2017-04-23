@@ -7,7 +7,7 @@
     <div class="row" ng-repeat="result in model.showResults.hits" ng-switch="" on="$index % 3">
         <div class="col-md-6" ng-switch-when="0">
                 <div class="col-sm-6">
-                    <img src="{{model.showResults.hits[$index].recipe.image}}" class="img-responsive img-thumbnail"/>
+                    <img ng-click="model.seeDetails(model.showResults.hits[$index].recipe)" src="{{model.showResults.hits[$index].recipe.image}}" class="pointer img-responsive img-thumbnail"/>
                 </div>
                 <div class="col-sm-6">
                     <a class="pointer" ng-click="model.seeDetails(model.showResults.hits[$index].recipe)"><h4>{{model.showResults.hits[$index].recipe.label}}</h4></a>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-6" ng-switch-when="0" ng-show="model.showResults.hits[$index+1]">
             <div class="col-sm-6">
-                <img src="{{model.showResults.hits[$index + 1].recipe.image}}" class="img-responsive img-thumbnail"/>
+                <img ng-click="model.seeDetails(model.showResults.hits[$index + 1].recipe)" src="{{model.showResults.hits[$index + 1].recipe.image}}" class="pointer img-responsive img-thumbnail"/>
             </div>
             <div class="col-sm-6">
                 <a class="pointer" ng-click="model.seeDetails(model.showResults.hits[$index + 1].recipe)"><h4>{{model.showResults.hits[$index + 1].recipe.label}}</h4></a>

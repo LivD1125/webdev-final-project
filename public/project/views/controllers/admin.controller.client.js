@@ -1,33 +1,29 @@
 (function () {
     angular
         .module("FinalWebAppMaker")
-        .controller("HomeController", HomeController);
+        .controller("AdminController", AdminController);
 
-    function HomeController($location, $rootScope, UserService, ExternalService) {
+    function AdminController($location, $rootScope, UserService, ExternalService) {
         var vm = this;
         //event handlers
-        vm.searchRecipes = getResults;
         function init() {
             vm.foodByWeather = foodByWeather;
-            if ($rootScope.loggedIn) {
-                if ($rootScope.currentUser && $rootScope.currentUser.isAdmin) {
-                    vm.isAdmin = true;
-                }
-                vm.logText = "Logout";
-                vm.logAction = logout;
-                vm.profileLink = "#/user";
-                vm.profileText = "Profile";
-            } else {
-                vm.logText = "Login";
-                vm.logAction = login;
-            }
+            vm.logText = "Logout";
+            vm.logAction = logout;
+            vm.profileLink = "#/user";
+            vm.profileText = "Profile";
+            vm.isAdmin = true;
+
+            getAllUsers();
         }
         function login() {
             $location.url('/login');
         }
 
-        function getResults(query) {
-                $location.url("results/" + query);
+        function getAllUsers() {
+            UserService.getAllUsers().then(function(users) {
+                vm.users = users.data;
+            });
         }
 
         function foodByWeather(query) {

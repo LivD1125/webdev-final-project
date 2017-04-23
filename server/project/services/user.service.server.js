@@ -21,6 +21,7 @@ module.exports = function (app) {
     app.put("/api/project/user/:userId", updateUser);
     app.post("/api/project/login", passport.authenticate('local'), login);
     app.post("/api/project/register", register);
+    app.post("/api/project/user", createUser);
     app.get("/api/project/loggedin", loggedin);
     app.post('/api/project/logout', logout);
     app.delete("/api/project/user/:userId", deleteUser);
@@ -34,7 +35,14 @@ module.exports = function (app) {
             successRedirect: '/project/#/user',
             failureRedirect: '/project/#/login'
         }));
+    app.get('/api/project/users', getAllUsers);
 
+
+    function getAllUsers(req, res) {
+        model.getAllUsers().then(function(resp) {
+            res.json(resp);
+        });
+    }
     function followUser(req, res) {
         model.follow(req.params.currentUser, req.body.profileUser).then(function(resp) {
             model.addFollower(req.body.profileUser, req.params.currentUser).then(function(respo) {
@@ -115,6 +123,17 @@ module.exports = function (app) {
                 }
             });
     }
+    function createUser(req, res) {
+        var user = req.body;
+        user.username = user.username.toLocaleLowerCase();
+        user.password = bcrypt.hashSync(user.password);
+        model
+            .createUser(user)
+            .then(function (user) {
+                res.send(user);
+            });
+    }
+
     function register(req, res) {
         var user = req.body;
         user.username = user.username.toLocaleLowerCase();

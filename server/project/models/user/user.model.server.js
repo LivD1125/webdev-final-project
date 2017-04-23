@@ -19,11 +19,25 @@ module.exports = function (model) {
         follow: follow,
         addFollower: addFollower,
         getFollowers: getFollowers,
-        getFollowing: getFollowing
+        getFollowing: getFollowing,
+        getAllUsers: getAllUsers
 
     };
     return api;
 
+    function getAllUsers() {
+        var deferred = q.defer();
+        userModel.find(function(err, users) {
+            if (err) {
+                console.log(err);
+                deferred.reject(err);
+            } else {
+                console.log(users);
+                deferred.resolve(users)
+            }
+        });
+        return deferred.promise;
+    }
     function getFollowers(followerIds) {
         var deferred = q.defer();
         userModel.find({ "_id" : { $in : followerIds } }, function(err, users) {
@@ -31,6 +45,7 @@ module.exports = function (model) {
                 console.log(err);
                 deferred.reject(err);
             } else {
+                console.log(users);
                 deferred.resolve(users);
             }
         });

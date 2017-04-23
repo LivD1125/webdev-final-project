@@ -8,6 +8,7 @@ module.exports = function () {
         lastName: String,
         email: String,
         phone: String,
+        isAdmin: Boolean,
         dateCreated: {type: Date, default: Date.now},
         following: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoUser'}],
         follower: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoUser'}],

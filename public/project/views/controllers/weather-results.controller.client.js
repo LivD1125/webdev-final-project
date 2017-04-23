@@ -11,6 +11,9 @@
         vm.seeDetails = seeDetails;
         function init() {
             if ($rootScope.loggedIn) {
+                if ($rootScope.currentUser.isAdmin) {
+                    vm.isAdmin = true;
+                }
                 vm.logText = "Logout";
                 vm.logAction = logout;
                 vm.profileLink = "#/user";

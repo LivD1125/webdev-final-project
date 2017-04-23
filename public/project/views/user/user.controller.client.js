@@ -119,11 +119,14 @@
         vm.register = register;
         vm.logText = "Login";
         vm.logAction = login;
-
+        console.log($rootScope.currentUser);
         function login() {
             $location.url('/login');
         }
         function register(user, validatepassword) {
+            if (user.username == 'admin') {
+                user.isAdmin = true;
+            }
             if (!user ||
                 !user.username ||
                 !user.password ||
@@ -132,14 +135,26 @@
                 vm.error = "Username, Password required. Validation must match";
                 return;
             }
-            UserService
-                .register(user)
-                .then(
-                    function (response) {
-                        $rootScope.currentUser = response.data;
-                        $rootScope.loggedin = true;
-                        $location.url("/user/");
-                    });
+
+            if ($rootScope.currentUser === undefined) {
+                console.log('register');
+                UserService
+                    .register(user)
+                    .then(
+                        function (response) {
+                            $rootScope.currentUser = response.data;
+                            $rootScope.loggedin = true;
+                            $location.url("/user/");
+                        });
+            } else {
+                console.log('create');
+                UserService
+                    .createUser(user)
+                    .then(
+                        function (response) {
+                            $location.url("/admin/");
+                        });
+            }
         }
 
     }

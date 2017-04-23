@@ -21,7 +21,9 @@
         if (vm.userId === $routeParams.userId) {
             $location.url('/user');
         }
-
+        if ($rootScope.currentUser.isAdmin) {
+            vm.isAdmin = true;
+        }
         var promise = UserService.findUserById($routeParams.userId);
         promise.success(function(user){
             vm.user = user;

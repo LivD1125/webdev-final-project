@@ -14,7 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarcollapse">
             <ul class="nav navbar-nav">
-                <li><a href="#/weather">Weather<span class="sr-only">(current)</span></a></li>
+                <li><a href="#/admin" ng-if="model.isAdmin">Admin<span class="sr-only">(current)</span></a></li>
                 <li><a href="{{model.profileLink}}">{{model.profileText}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

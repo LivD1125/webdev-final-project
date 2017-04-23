@@ -17,6 +17,9 @@
         vm.logText = "Logout";
 
         function init() {
+            if ($rootScope.currentUser.isAdmin) {
+                vm.isAdmin = true;
+            }
             var promise = RecipeService.findRecipeById(vm.recipeId);
             promise.success(function(recipe){
                 vm.recipe = recipe;

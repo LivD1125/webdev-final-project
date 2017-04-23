@@ -10,6 +10,9 @@
         // event handlers
         vm.seeDetails = seeDetails;
         if ($rootScope.currentUser) {
+            if ($rootScope.currentUser.isAdmin) {
+                vm.isAdmin = true;
+            }
             vm.userId = $rootScope.currentUser._id;
             vm.logText = "Login";
             vm.logAction = login;
@@ -20,6 +23,7 @@
             vm.logAction = logout;
         }
         function init() {
+
             getResults();
             var promise = UserService.findUserById(vm.userId);
             promise.success(function(user){
