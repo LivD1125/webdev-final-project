@@ -52,6 +52,9 @@
 
         function init() {
             vm.user = $rootScope.currentUser;
+            if ($rootScope.currentUser && $rootScope.currentUser.isAdmin) {
+                vm.isAdmin = true;
+            }
             getRecipes();
             getFollowers();
         }
