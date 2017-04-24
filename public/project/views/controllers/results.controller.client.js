@@ -9,21 +9,20 @@
 
         // event handlers
         vm.seeDetails = seeDetails;
-        if ($rootScope.currentUser) {
-            if ($rootScope.currentUser.isAdmin) {
-                vm.isAdmin = true;
-            }
-            vm.userId = $rootScope.currentUser._id;
-            vm.logText = "Login";
-            vm.logAction = login;
-            vm.profileLink = "#/user";
-            vm.profileText = "Profile";
-        } else {
-            vm.logText = "Logout";
-            vm.logAction = logout;
-        }
         function init() {
-
+            if ($rootScope.loggedIn) {
+                if ($rootScope.currentUser.isAdmin) {
+                    vm.isAdmin = true;
+                }
+                vm.userId = $rootScope.currentUser._id;
+                vm.logText = "Login";
+                vm.logAction = login;
+                vm.profileLink = "#/user";
+                vm.profileText = "Profile";
+            } else {
+                vm.logText = "Logout";
+                vm.logAction = logout;
+            }
             getResults();
             var promise = UserService.findUserById(vm.userId);
             promise.success(function(user){
