@@ -13,11 +13,11 @@
 
 
         function findCurrentWeather(query) {
-            return $http.get("https://api.openweathermap.org/data/2.5/weather?zip="
+            return $http.get("http://api.openweathermap.org/data/2.5/weather?zip="
                 +query+"&units=imperial&APPID=c2e919e9c4bd3e0d1349fc581db46c27");
         }
         function getForecast(query) {
-            return $http.get("https://api.openweathermap.org/data/2.5/forecast/daily?zip="
+            return $http.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip="
                 +query+"&units=imperial&APPID=c2e919e9c4bd3e0d1349fc581db46c27");
         }
         function searchResults(query) {
