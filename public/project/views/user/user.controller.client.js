@@ -122,8 +122,15 @@
         function login() {
             $location.url('/login');
         }
+
+        function validateEmail(email)
+        {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
         function register(user, validatepassword) {
-            if (user.username == 'admin') {
+            if (user && user.username == 'admin') {
                 user.isAdmin = true;
             }
             if (!user ||
@@ -132,6 +139,10 @@
                 !validatepassword ||
                 user.password !== validatepassword) {
                 vm.error = "Username, Password required. Validation must match";
+                return;
+            }
+            if (!validateEmail(user.email)) {
+                vm.error = "Please provide a real email address";
                 return;
             }
 
