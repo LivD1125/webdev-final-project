@@ -32,7 +32,6 @@ module.exports = function (model) {
                 console.log(err);
                 deferred.reject(err);
             } else {
-                console.log(users);
                 deferred.resolve(users)
             }
         });
@@ -45,7 +44,6 @@ module.exports = function (model) {
                 console.log(err);
                 deferred.reject(err);
             } else {
-                console.log(users);
                 deferred.resolve(users);
             }
         });
@@ -66,7 +64,6 @@ module.exports = function (model) {
     }
 
     function follow(userId, profileId) {
-        console.log(profileId);
         var deferred = q.defer();
         userModel
             .update(

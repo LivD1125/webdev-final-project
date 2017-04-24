@@ -42,7 +42,6 @@
         }
 
         function updateUser(newUser) {
-            console.log(newUser);
             UserService
                 .updateUser(vm.userId, newUser)
                 .success(function(user) {
