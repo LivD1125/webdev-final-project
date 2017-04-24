@@ -12,6 +12,7 @@
         vm.logout = logout;
         vm.user = $rootScope.currentUser;
         vm.userId = $rootScope.currentUser._id;
+        vm.ownProfile = true;
 
         function init() {
             if ($rootScope.currentUser.isAdmin) {

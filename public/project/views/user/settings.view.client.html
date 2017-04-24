@@ -25,8 +25,9 @@
                     </div>
                 </form>
             <button ng-click="model.deleteUser()" ng-if="model.canDelete" class="btn btn-danger read-more btn-lg pull-left">Delete User</button>
-            <a href="#/user" class="btn btn-default read-more btn-lg pull-right cancel">Cancel</a>
-            <button ng-click="model.updateUser(model.user)" class="btn btn-default read-more btn-lg pull-right">Save</button>
+            <a href="#/user/{{model.user._id}}" ng-if="model.canDelete"  class="btn btn-default read-more btn-lg pull-right ">Cancel</a>
+            <a href="#/user" ng-if="model.ownProfile" class="btn btn-danger read-more btn-lg pull-right">Cancel</a>
+            <button ng-click="model.updateUser(model.user)" class="btn btn-primary read-more btn-lg pull-right cancel">Save</button>
             </div>
         </div>
     </div>
