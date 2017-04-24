@@ -141,7 +141,7 @@
                 vm.error = "Username, Password required. Validation must match";
                 return;
             }
-            if (!validateEmail(user.email)) {
+            if (user.email && !validateEmail(user.email)) {
                 vm.error = "Please provide a real email address";
                 return;
             }
