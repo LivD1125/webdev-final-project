@@ -40,7 +40,6 @@
         }
         function seeDetails(recipe) {
             RecipeService.saveRecipe(recipe).then(function(res) {
-                console.log(res);
                 $location.url('/recipe/' + res.data._id);
             });
 

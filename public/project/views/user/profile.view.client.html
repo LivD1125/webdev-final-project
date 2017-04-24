@@ -3,17 +3,10 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-8 text-left col-md-push-2">
-            <div class="row">
-                <div class="col-sm-8">
-                    <h1 class="header">{{model.user.username}}</h1>
-                </div>
-                <div class="col-sm-4 settings pull-right">
-                    <a href="#/settings">
-                        <span class=" pull-right glyphicon glyphicon-cog edit-site">
-                      </span>
-                    </a>
-                </div>
-            </div>
+            <h1 class="header name">{{model.user.username}}</h1>
+            <a href="#/settings">
+            <span class="pull-right glyphicon glyphicon-cog edit-site">
+              </span>
             <hr>
             <h3 class="sub-header">Liked Recipes</h3>
             <div class="col-sm-10">
