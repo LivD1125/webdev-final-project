@@ -62,7 +62,7 @@
                                                 <img class="img-responsive thumbnail" src={{model.recipes[$index].image}} />
                                             </div>
                                             <div class="col-sm-6">
-                                                <a href="#/recipe/{{model.recipes[$index]._id}}"><h4 class="foll">{{model.recipes[$index].label}}</h4></a>
+                                                <a class="pointer" ng-click="model.viewRecipe(model.recipes[$index ]._id)"><h4 class="foll">{{model.recipes[$index].label}}</h4></a>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                                 <img class="img-responsive thumbnail" src={{model.recipes[$index+1].image}} />
                                             </div>
                                             <div class="col-sm-6">
-                                                <a class="foll" href="#/recipe/{{model.recipes[$index + 1]._id}}"><h4 class="foll">{{model.recipes[$index + 1].label}}</h4></a>
+                                                <a class="foll pointer" ng-click="model.viewRecipe(model.recipes[$index + 1]._id)"><h4 class="foll">{{model.recipes[$index + 1].label}}</h4></a>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                                 <img class="img-responsive thumbnail" src={{model.recipes[$index+2].image}} />
                                             </div>
                                             <div class="col-sm-6">
-                                                <a class="foll" href="#/recipe/{{model.recipes[$index + 2]._id}}"><h4 class="foll">{{model.recipes[$index + 2].label}}</h4></a>
+                                                <a class="foll pointer" ng-click="model.viewRecipe(model.recipes[$index + 1]._id)"><h4 class="foll">{{model.recipes[$index + 2].label}}</h4></a>
                                             </div>
                                         </div>
                                     </div>

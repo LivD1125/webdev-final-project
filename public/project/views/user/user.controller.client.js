@@ -48,6 +48,7 @@
         vm.profileLink = "#/user";
         vm.profileText = "Profile";
         vm.isViewMore = false;
+        vm.viewRecipe = viewRecipe;
         vm.userId = $rootScope.currentUser._id;
 
         function init() {
@@ -60,6 +61,11 @@
         }
         init();
 
+        function viewRecipe(recipeId) {
+            $('.modal-backdrop').remove();
+            $('.modal-open').removeClass();
+            $location.url('/recipe/' + recipeId);
+        }
         function getFollowers() {
             UserService.getFollowers(vm.user.follower, vm.user.following).then(function(res){
                 vm.followers = res.data.followers;
