@@ -74,6 +74,9 @@ body {
 .btn-like {
     width: 80px;
 }
+.cancel {
+    padding-right: 10px;
+}
 .pointer {
     cursor: pointer;
 }
