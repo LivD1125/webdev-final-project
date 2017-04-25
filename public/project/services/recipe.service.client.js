@@ -9,9 +9,18 @@
             "saveRecipe": saveRecipe,
             "findRecipeById": findRecipeById,
             "isLiked": isLiked,
-            "getRecipes": getRecipes
+            "getRecipes": getRecipes,
+            "addComment": addComment
         };
         return api;
+
+        function addComment(recipeId, commentId) {
+            var id = {
+                commentId: commentId
+            };
+            return $http.put("/api/project/recipe/comment/"+ recipeId, id);
+        }
+
         function getRecipes(recipeIds) {
             return $http.post('/api/project/recipes', recipeIds);
         }

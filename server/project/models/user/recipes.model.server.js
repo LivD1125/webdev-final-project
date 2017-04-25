@@ -11,7 +11,8 @@ module.exports = function (model) {
         findByUrl: findByUrl,
         updateRecipe: updateRecipe,
         findLikes: findLikes,
-        getRecipes: getRecipes
+        getRecipes: getRecipes,
+        addComment: addComment
     };
     return api;
 
@@ -60,6 +61,20 @@ module.exports = function (model) {
                 deferred.resolve(pg);
             }
         });
+        return deferred.promise;
+    }
+
+    function addComment(recipeId, commentId) {
+        var deferred = q.defer();
+        recipeModel
+            .update(
+                {_id: recipeId},
+                {$push: {"comments": commentId.commentId}},
+                function (err, status) {
+                    console.log(err);
+                    deferred.resolve(status);
+
+                });
         return deferred.promise;
     }
 

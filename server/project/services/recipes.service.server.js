@@ -3,12 +3,11 @@ module.exports = function (app) {
 
     app.post('/api/project/recipe', saveRecipe);
     app.get('/api/project/recipe/:recipeId', findRecipeById);
-    // app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
-    // app.get('/api/page/:pageId', findPageById);
     app.put('/api/project/recipe/:recipeId', updateRecipe);
+    app.put('/api/project/recipe/comment/:recipeId', addComment);
+
     app.get('/api/project/recipe/like/:userId/:recipeId', isLiked);
     app.post('/api/project/recipes', getRecipes);
-    // app.delete('/api/page/:pageId', deletePage);
 
     function getRecipes(req, res) {
         model.getRecipes(req.body).then(function(recipes) {
@@ -38,6 +37,14 @@ module.exports = function (app) {
                                 res.json(resp);
                     });
                 }
+            });
+    }
+
+    function addComment(req, res) {
+        model
+            .addComment(req.params.recipeId, req.body)
+            .then(function (status) {
+                res.json(status);
             });
     }
 

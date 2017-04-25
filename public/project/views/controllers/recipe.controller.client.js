@@ -4,13 +4,14 @@
         .controller("RecipeController", RecipeController);
 
     function RecipeController($routeParams, $location,
-                              $rootScope, UserService, RecipeService) {
+                              $rootScope, UserService, RecipeService, CommentsService) {
         var vm = this;
         vm.recipeId = $routeParams.recipeId;
         // event handlers
         vm.logout = logout;
         vm.likePage = likePage;
         vm.logAction = logout;
+        vm.createComment = createComment;
         vm.profileLink = "#/user";
         vm.profileText = "Profile";
         vm.userId = $rootScope.currentUser._id;
@@ -24,6 +25,7 @@
             promise.success(function(recipe){
                 vm.recipe = recipe;
                 getUsers();
+                getComments();
             });
 
             isLiked();
@@ -65,6 +67,27 @@
             });
             UserService.likePage(vm.recipeId, vm.userId).then(function(res) {
                 //fire and forget
+            });
+        }
+
+        function createComment(comment) {
+            comment.user = vm.userId;
+            comment.recipe = vm.recipeId;
+            CommentsService.saveComment(comment).then(function(res) {
+                vm.comments.push(res.data);
+                RecipeService.addComment(vm.recipeId, res.data._id).then(function(res) {
+                    //fire and forget
+                });
+            });
+        }
+
+        function getComments() {
+            CommentsService.getComments(vm.recipe.comments).then(function (res) {
+                vm.comments = res.data;
+
+                if (vm.comments.length != 0){
+                    vm.hasComments = true;
+                }
             });
         }
 

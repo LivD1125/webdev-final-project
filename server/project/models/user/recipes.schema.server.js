@@ -15,7 +15,7 @@ module.exports = function () {
         cautions: [String],
         ingredientLines: [String],
         calories: Number,
-        Comments: [String],
+        comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoComments'}],
         users: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProjectMongoUsers'}]
     }, {collection: 'project.mongo.recipes'});
 

@@ -50,6 +50,9 @@ body {
 .padding-above {
     padding-top: 10px;
 }
+.comment-btn {
+    white-space: normal;
+}
 .header {
     font-weight: bold;
     color: darkorange !important;
