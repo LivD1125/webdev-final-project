@@ -74,6 +74,7 @@
             comment.user = vm.userId;
             comment.recipe = vm.recipeId;
             CommentsService.saveComment(comment).then(function(res) {
+                vm.hasComments = true;
                 vm.comments.push(res.data);
                 RecipeService.addComment(vm.recipeId, res.data._id).then(function(res) {
                     //fire and forget
@@ -85,7 +86,7 @@
             CommentsService.getComments(vm.recipe.comments).then(function (res) {
                 vm.comments = res.data;
 
-                if (vm.comments.length != 0){
+                if (vm.comments.length !== 0){
                     vm.hasComments = true;
                 }
             });
