@@ -33,6 +33,12 @@
                 vm.notFollowing = false;
                 vm.isFollowing = true;
             }
+            if(vm.user.follower && vm.user.follower.length !== 0) {
+                vm.hasFollowers = true;
+            }
+            if(vm.user.following && vm.user.following.length !== 0) {
+                vm.hasFollowing = true;
+            }
             getRecipes();
             getFollowers();
         });

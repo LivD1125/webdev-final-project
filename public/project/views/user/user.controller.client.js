@@ -56,6 +56,12 @@
             if ($rootScope.currentUser && $rootScope.currentUser.isAdmin) {
                 vm.isAdmin = true;
             }
+            if($rootScope.currentUser.follower && $rootScope.currentUser.follower.length !== 0) {
+                vm.hasFollowers = true;
+            }
+            if($rootScope.currentUser.following && $rootScope.currentUser.following.length !== 0) {
+                vm.hasFollowing = true;
+            }
             getRecipes();
             getFollowers();
         }

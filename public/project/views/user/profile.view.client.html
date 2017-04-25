@@ -102,11 +102,11 @@
             <p class="bio">{{model.user.aboutMe}}</p>
         </div>
         <div class="col-sm-2 sidenav">
-            <h3 class="sub-header">Followers</h3>
+            <h3 ng-if="model.hasFollowers" class="sub-header">Followers</h3>
             <div ng-repeat="follower in model.followers">
                 <a class="bio foll" href="#/user/{{follower._id}}">{{follower.username}}</a>
             </div>
-            <h3 class="sub-header">Following</h3>
+            <h3 ng-if="model.hasFollowing" class="sub-header">Following</h3>
             <div ng-repeat="following in model.following">
                 <a class="bio foll" href="#/user/{{following._id}}">{{following.username}}</a>
             </div>
